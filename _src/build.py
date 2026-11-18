@@ -158,6 +158,7 @@ FOOTER = """
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
 <script src="assets/js/art.js"></script>
 <script src="assets/js/main.js"></script>
@@ -175,12 +176,19 @@ ICONS = {
     "CHECK": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg>',
 }
 
+HERO3D = """<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.170.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.170.0/examples/jsm/"}}</script>
+<script type="module" src="assets/js/hero3d.js"></script>
+"""
+
 def build():
     for slug, title, desc in PAGES:
         body = (SRC / f"{slug}.html").read_text()
         for k, v in ICONS.items():
             body = body.replace("{{" + k + "}}", v)
-        html = head(title, desc, slug) + nav(slug) + '\n<main id="main">\n' + body + "\n</main>\n" + FOOTER
+        footer = FOOTER
+        if slug == "index":
+            footer = footer.replace("</body>", HERO3D + "</body>")
+        html = head(title, desc, slug) + nav(slug) + '\n<main id="main">\n' + body + "\n</main>\n" + footer
         (OUT / f"{slug}.html").write_text(html)
         print("✓", slug)
 

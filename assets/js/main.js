@@ -678,6 +678,155 @@
   quoteForm();
   contactForm();
   motion();
+  v2();
+
+  /* ======================================================================
+     V2 — merkbeleving: posters, wipe, stickermuur, kinetische type, cursor
+     ====================================================================== */
+  function v2() {
+    // Poster-schakelaar: dozen onbedrukt / bedrukt
+    const pt = $("[data-poster-toggle]");
+    if (pt) {
+      const scope = $("#poster-tins");
+      $$("button", pt).forEach((b) => b.addEventListener("click", () => {
+        pt.dataset.state = b.dataset.value;
+        $$("button", pt).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        scope.classList.toggle("is-uv", b.dataset.value === "uv");
+        if (hasGsap && !reduce) gsap.fromTo($$(".pa", scope), { y: 0 }, { y: -18, yoyo: true, repeat: 1, duration: .35, ease: "power2.out", stagger: .06 });
+      }));
+    }
+
+    // Wipe: sleep om te drukken
+    const wipe = $("#wipe");
+    if (wipe) {
+      const handle = $(".wipe-handle", wipe);
+      let pos = 50, drag = false;
+      const set = (p) => {
+        pos = Math.max(0, Math.min(100, p));
+        wipe.style.setProperty("--pos", pos + "%");
+        handle.setAttribute("aria-valuenow", String(Math.round(pos)));
+        handle.setAttribute("aria-valuetext", `${Math.round(100 - pos)}% bedrukt`);
+      };
+      const fromEvent = (e) => { const r = wipe.getBoundingClientRect(); set(((e.clientX - r.left) / r.width) * 100); };
+      wipe.addEventListener("pointerdown", (e) => { drag = true; wipe.classList.add("is-drag"); wipe.setPointerCapture(e.pointerId); fromEvent(e); });
+      wipe.addEventListener("pointermove", (e) => { if (drag) fromEvent(e); });
+      const end = () => { drag = false; wipe.classList.remove("is-drag"); };
+      wipe.addEventListener("pointerup", end); wipe.addEventListener("pointercancel", end);
+      handle.addEventListener("keydown", (e) => {
+        if (e.key === "ArrowLeft") { set(pos - 5); e.preventDefault(); }
+        if (e.key === "ArrowRight") { set(pos + 5); e.preventDefault(); }
+        if (e.key === "Home") { set(0); e.preventDefault(); }
+        if (e.key === "End") { set(100); e.preventDefault(); }
+      });
+      set(50);
+      if (hasGsap && !reduce) {
+        const o = { p: 92 };
+        gsap.to(o, { p: 30, duration: 1.6, ease: "expo.inOut", onUpdate: () => !drag && set(o.p), scrollTrigger: { trigger: wipe, start: "top 70%", once: true },
+          onComplete: () => gsap.to(o, { p: 50, duration: 1, ease: "elastic.out(1, .6)", onUpdate: () => !drag && set(o.p) }) });
+      }
+    }
+
+    // Stickermuur: sleep, gooi, plak
+    const wall = $("#wall");
+    if (wall && window.Draggable && hasGsap) {
+      gsap.registerPlugin(Draggable);
+      let z = 10;
+      $$(".wi", wall).forEach((el, i) => {
+        if (!reduce) gsap.from(el, { scale: 0, rotate: (i % 2 ? 40 : -40), duration: 1, ease: "back.out(1.8)", delay: i * .06, scrollTrigger: { trigger: wall, start: "top 70%", once: true } });
+        Draggable.create(el, {
+          bounds: wall, type: "x,y", zIndexBoost: false,
+          onPress() { el.style.zIndex = ++z; gsap.to(el, { scale: 1.12, duration: .3, ease: "power3.out" }); gsap.to(el.firstElementChild, { filter: "drop-shadow(0 30px 30px rgba(20,27,77,.3))", duration: .3 }); },
+          onDrag() { gsap.to(el, { rotation: gsap.utils.clamp(-25, 25, this.deltaX * 1.6), duration: .4, ease: "power2.out" }); },
+          onRelease() {
+            gsap.to(el, { scale: 1, rotation: 0, duration: .7, ease: "elastic.out(1, .45)" });
+            gsap.to(el.firstElementChild, { filter: "drop-shadow(0 0 0 rgba(0,0,0,0))", duration: .4 });
+          }
+        });
+      });
+    }
+
+    // Kinetische rijen: drijven en versnellen met de scroll
+    const rows = $$(".kin-row");
+    if (rows.length && hasGsap) {
+      const state = rows.map((row) => {
+        const track = $(".kin-track", row);
+        return { row, track, dir: +row.dataset.dir, x: 0, w: track.scrollWidth / 2 };
+      });
+      let boost = 0;
+      if (!reduce) {
+        ScrollTrigger.create({ trigger: ".kin-sec", start: "top bottom", end: "bottom top", onUpdate: (s) => { boost = gsap.utils.clamp(-30, 30, s.getVelocity() / 120); } });
+        gsap.ticker.add(() => {
+          boost *= .92;
+          state.forEach((s) => {
+            s.x += (1.1 + Math.abs(boost)) * s.dir * (boost < 0 ? -1 : 1);
+            s.x = gsap.utils.wrap(-s.w, 0, s.x);
+            s.track.style.transform = `translate3d(${s.x}px,0,0)`;
+          });
+        });
+        window.addEventListener("resize", () => state.forEach((s) => (s.w = s.track.scrollWidth / 2)));
+      }
+    }
+
+    // Woord-voor-woord inkleuren
+    $$("[data-words]").forEach((p) => {
+      p.innerHTML = p.textContent.trim().split(/\s+/).map((w) => `<span class="wd">${w}</span>`).join(" ");
+      if (!hasGsap || reduce) { $$(".wd", p).forEach((w) => (w.style.opacity = 1)); return; }
+      gsap.to($$(".wd", p), { opacity: 1, stagger: .08, ease: "none", scrollTrigger: { trigger: p, start: "top 80%", end: "bottom 45%", scrub: true } });
+    });
+
+    if (!hasGsap || reduce) return;
+
+    // Posters schuiven over elkaar, de vorige zakt weg
+    const posters = $$(".poster");
+    posters.forEach((p, i) => {
+      const next = posters[i + 1];
+      if (next) gsap.to($(".poster-inner", p), { scale: .9, opacity: .35, ease: "none", scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true } });
+      gsap.from($(".poster-word", p), { yPercent: 40, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: p, start: "top 75%", once: true } });
+    });
+    // Dozen: deksels gaan open op de scroll
+    $$("#poster-tins .pa").forEach((pa, i) => {
+      gsap.fromTo(pa, { y: 120 + i * 40, rotate: i % 2 ? 8 : -6 }, { y: 0, rotate: 0, ease: "none", scrollTrigger: { trigger: "#dozen", start: "top bottom", end: "top top", scrub: 1 } });
+      const lid = $(".lid", pa);
+      if (lid) gsap.to(lid, { y: -40 - i * 10, ease: "none", scrollTrigger: { trigger: "#dozen", start: "top top", end: "bottom top", scrub: 1 } });
+    });
+    // Stickers waaieren open
+    const fan = $$(".fan-item");
+    // CSS-standaardopstelling uitzetten, GSAP neemt het over
+    fan.concat($$(".orb")).forEach((el) => { el.style.rotate = "0deg"; el.style.translate = "-50% -50%"; });
+    fan.forEach((f, i) => {
+      const a = (i - (fan.length - 1) / 2);
+      gsap.fromTo(f, { rotate: 0, x: 0, y: 0 }, { rotate: a * 14, x: a * 90, y: Math.abs(a) * 30, ease: "none", scrollTrigger: { trigger: "#stickers-p", start: "top 80%", end: "top 10%", scrub: 1 } });
+    });
+    // Badges draaien in een baan
+    const orbs = $$(".orb");
+    const orbit = { t: 0 };
+    gsap.to(orbit, { t: 1, ease: "none", scrollTrigger: { trigger: "#badges-p", start: "top bottom", end: "bottom top", scrub: 1 },
+      onUpdate: () => {
+        const R = Math.min(window.innerWidth * .16, 210);
+        orbs.forEach((o, i) => {
+          const a = orbit.t * Math.PI * 1.5 + (i / orbs.length) * Math.PI * 2;
+          gsap.set(o, { x: Math.cos(a) * R, y: Math.sin(a) * R * .6, rotate: Math.sin(a) * 12, zIndex: Math.round(Math.sin(a) * 10) + 10, scale: .85 + (Math.sin(a) + 1) * .12 });
+        });
+      } });
+
+    // Inktdruppel-cursor
+    if (fine) {
+      const c = document.createElement("div");
+      c.className = "ink-cursor";
+      c.innerHTML = `<svg viewBox="0 0 100 100"><path d="M50 2 L78 30 A40 40 0 1 1 22 30 Z"/></svg>`;
+      document.body.appendChild(c);
+      const xTo = gsap.quickTo(c, "x", { duration: .45, ease: "power3.out" }), yTo = gsap.quickTo(c, "y", { duration: .45, ease: "power3.out" });
+      let lx = 0;
+      window.addEventListener("pointermove", (e) => {
+        xTo(e.clientX); yTo(e.clientY); c.classList.add("is-on");
+        gsap.to(c, { rotate: gsap.utils.clamp(-35, 35, (e.clientX - lx) * 2), duration: .4 }); lx = e.clientX;
+        const t = e.target;
+        c.classList.toggle("is-hover", !!t.closest("a, button, .wi, .wipe, [role=slider], input, select, textarea, label"));
+        c.classList.toggle("is-dark", !!t.closest(".x-hero, .on-ink, .wipe-sec, .kin-sec, .footer, .poster--coral, .cta-block"));
+      }, { passive: true });
+      document.addEventListener("pointerleave", () => c.classList.remove("is-on"));
+    }
+  }
 
   // Na het laden van fonts posities herberekenen
   if (hasGsap && document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());

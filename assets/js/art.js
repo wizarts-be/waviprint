@@ -327,7 +327,8 @@
       const sets = {
         brand: [C.cream, C.coral, C.sun],
         light: [C.ink, C.coral, C.sun],
-        sky: [C.sky, C.coral, C.sun]
+        sky: [C.sky, C.coral, C.sun],
+        ink: [C.ink, C.cream, C.sun]
       };
       el.innerHTML = waves({ colors: sets[preset] || sets.brand, stroke: +el.dataset.stroke || 26, gap: +el.dataset.gap || 62, amp: +el.dataset.amp || 26 });
     });
