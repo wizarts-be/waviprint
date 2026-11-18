@@ -1,0 +1,12 @@
+TYPOGRAPHIES WAVIPRINT (gratuites, libres pour un usage commercial — licence SIL Open Font License)
+
+Titres : Bricolage Grotesque — ExtraBold (800)
+  https://fonts.google.com/specimen/Bricolage+Grotesque
+
+Textes : Inter — Regular (400), Medium (500), SemiBold (600)
+  https://fonts.google.com/specimen/Inter
+
+Sur chaque page : bouton « Get font » puis « Download all ». Installer les fichiers .ttf (double-clic > Installer).
+Si Inter n'est pas disponible (Word chez un client, Gmail) : utiliser Arial.
+
+Le logo n'a besoin d'aucune police : le texte y est vectorisé.

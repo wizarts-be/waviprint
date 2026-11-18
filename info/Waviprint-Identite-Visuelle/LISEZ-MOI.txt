@@ -1,0 +1,20 @@
+WAVIPRINT — IDENTITÉ VISUELLE (version 1.0, novembre 2026)
+
+Commencez par 00-Charte-graphique-Waviprint.pdf : elle explique le logo, les règles, et page 13 quel fichier utiliser pour quel usage.
+
+00  Charte graphique (PDF, 14 pages)
+01  Logos — 5 versions × 4 couleurs, en SVG, PDF CMJN, PDF Pantone et PNG transparent
+02  Couleurs — codes HEX / RGB / CMJN / Pantone, nuancier Adobe (.ase), CSS
+03  Typographies — liens de téléchargement
+04  Cartes de visite (Céline Saelens, Ilias Akariou) — PDF prêts à imprimer, 85 x 55 mm, fond perdu 3 mm
+05  Stickers — rond, carré, goutte, avec ligne de découpe « CutContour »
+06  Écussons et étiquettes tissées — version 1 couleur
+07  Papeterie — papier en-tête A4 (PDF) et modèle Word devis/facture
+08  Signature mail — HTML + logo + mode d'emploi
+09  Réseaux sociaux — photos de profil, bannière LinkedIn, couverture Facebook, post Instagram
+10  Favicon du site
+
+Champs à compléter : [SITE WEB], [ADRESSE], TVA BE [NUMÉRO], IBAN.
+Les références Pantone sont les teintes les plus proches : à valider sur nuancier avant une production en ton direct.
+
+Identité visuelle conçue par Kore Agency.

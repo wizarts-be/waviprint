@@ -1,0 +1,294 @@
+<section class="page-hero" aria-labelledby="of-title" style="padding-bottom:clamp(2rem,1rem + 2vw,3.5rem)">
+  <div class="container">
+    <h1 id="of-title" data-split>
+      <span class="split-line"><span>Offerte</span></span>
+      <span class="split-line accent-coral"><span>aanvragen.</span></span>
+    </h1>
+    <p class="lead" data-reveal style="max-width:44ch">Drie korte stappen. Hoe meer je vertelt, hoe gerichter onze prijs. Weet je iets nog niet? Laat het gewoon open.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-label="Offerteformulier">
+  <div class="container form-shell">
+    <div class="form-card bezel" data-reveal>
+      <div class="core">
+        <nav class="progress" aria-label="Stappen">
+          <ol>
+            <li class="is-current"><span class="pn">1</span>Product</li>
+            <li class="bar" aria-hidden="true"></li>
+            <li><span class="pn">2</span>Details</li>
+            <li class="bar" aria-hidden="true"></li>
+            <li><span class="pn">3</span>Jouw gegevens</li>
+          </ol>
+        </nav>
+
+        <form id="quote-form" novalidate data-endpoint="" enctype="multipart/form-data">
+          <!-- STAP 1 -->
+          <fieldset class="form-step" style="border:0;padding:0;margin:0">
+            <legend class="sr-only">Stap 1: product</legend>
+            <h2 tabindex="-1">Waarvoor wil je een offerte?</h2>
+            <p class="muted">Kies een van de drie productgroepen. Daarna krijg je de vragen die erbij horen.</p>
+            <div class="cat-picker field">
+              <div class="cat-option">
+                <input type="radio" name="categorie" id="cat-dozen" value="dozen" required>
+                <label for="cat-dozen">
+                  <span class="cv tins-scope is-uv" aria-hidden="true"><span data-tin="rond" data-color="goud" data-art="bakkerij"></span></span>
+                  <strong>Metalen dozen</strong>
+                  <span>Onbedrukt of met UV-bedrukking</span>
+                </label>
+                <span class="check" aria-hidden="true">{{CHECK}}</span>
+              </div>
+              <div class="cat-option">
+                <input type="radio" name="categorie" id="cat-stickers" value="stickers">
+                <label for="cat-stickers">
+                  <span class="cv" aria-hidden="true" style="background:var(--sun)"><span data-sticker="druppel" data-art="merci" style="width:44%"></span></span>
+                  <strong>Stickers op maat</strong>
+                  <span>Elke vorm, elke maat</span>
+                </label>
+                <span class="check" aria-hidden="true">{{CHECK}}</span>
+              </div>
+              <div class="cat-option">
+                <input type="radio" name="categorie" id="cat-badges" value="badges">
+                <label for="cat-badges">
+                  <span class="cv" aria-hidden="true" style="background:var(--sky)"><span data-badge="schild" data-art="scouts" style="width:42%"></span></span>
+                  <strong>Geweven etiketten en badges</strong>
+                  <span>Badges, labels en emblemen</span>
+                </label>
+                <span class="check" aria-hidden="true">{{CHECK}}</span>
+              </div>
+            </div>
+            <p id="cat-error" class="form-error" role="alert" hidden>Kies eerst een productgroep, dan gaan we verder.</p>
+            <div class="form-nav">
+              <span></span>
+              <button class="btn" type="button" data-next data-arrow>Volgende stap</button>
+            </div>
+          </fieldset>
+
+          <!-- STAP 2 -->
+          <fieldset class="form-step" style="border:0;padding:0;margin:0" hidden>
+            <legend class="sr-only">Stap 2: details</legend>
+            <h2 tabindex="-1">Vertel ons meer</h2>
+            <p class="muted">Velden met een sterretje hebben we nodig. De rest helpt ons om gerichter te rekenen.</p>
+
+            <!-- Dozen -->
+            <div class="fields cond" data-cat="dozen" hidden>
+              <div class="field full">
+                <label for="f-model">Model *</label>
+                <select class="select" id="f-model" name="model" required></select>
+                <span class="error">Kies een model, of "Ander model of eigen vorm".</span>
+              </div>
+              <div class="field cond" data-if-eigen hidden>
+                <label for="f-vorm">Gewenste vorm</label>
+                <input class="input" id="f-vorm" name="eigen_vorm" placeholder="Bijvoorbeeld ovaal of achthoekig">
+              </div>
+              <div class="field cond" data-if-eigen hidden>
+                <label for="f-afm">Afmetingen</label>
+                <input class="input" id="f-afm" name="eigen_afmetingen" placeholder="Bijvoorbeeld 120 × 80 × 40 mm">
+              </div>
+              <div class="field full">
+                <span class="flabel" id="kleur-lbl">Kleur</span>
+                <div class="choice-row" id="f-kleur-wrap" role="radiogroup" aria-labelledby="kleur-lbl"></div>
+              </div>
+              <div class="field full">
+                <span class="flabel" id="druk-lbl">Uitvoering *</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="druk-lbl">
+                  <div class="choice"><input type="radio" name="bedrukking" id="d-plain" value="onbedrukt" required><label for="d-plain">Onbedrukt</label></div>
+                  <div class="choice"><input type="radio" name="bedrukking" id="d-uv" value="uv"><label for="d-uv">Met UV-bedrukking</label></div>
+                </div>
+                <span class="error">Kies onbedrukt of met UV-bedrukking.</span>
+              </div>
+              <div class="field full cond" data-if-uv hidden>
+                <span class="flabel" id="plaats-lbl">Plaatsing van het ontwerp</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="plaats-lbl">
+                  <div class="choice"><input type="radio" name="plaatsing" id="p1" value="Deksel"><label for="p1">Deksel</label></div>
+                  <div class="choice"><input type="radio" name="plaatsing" id="p2" value="Zijkant"><label for="p2">Zijkant</label></div>
+                  <div class="choice"><input type="radio" name="plaatsing" id="p3" value="Deksel en zijkant"><label for="p3">Deksel en zijkant</label></div>
+                  <div class="choice"><input type="radio" name="plaatsing" id="p4" value="Nog niet zeker"><label for="p4">Nog niet zeker</label></div>
+                </div>
+              </div>
+              <div class="field full cond" data-if-uv hidden>
+                <label for="f-ontwerp">Wat wil je laten drukken? <span class="opt">(optioneel)</span></label>
+                <textarea class="textarea" id="f-ontwerp" name="ontwerp_omschrijving" placeholder="Bijvoorbeeld: ons logo in het midden van het deksel, met de naam van de winkel eronder."></textarea>
+              </div>
+            </div>
+
+            <!-- Stickers -->
+            <div class="fields cond" data-cat="stickers" hidden>
+              <div class="field full">
+                <span class="flabel" id="sv-lbl">Vorm *</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="sv-lbl">
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv1" value="Rond" required><label for="sv1">Rond</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv2" value="Vierkant"><label for="sv2">Vierkant</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv3" value="Rechthoek"><label for="sv3">Rechthoek</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv4" value="Ovaal"><label for="sv4">Ovaal</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv5" value="Druppel"><label for="sv5">Druppel</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv6" value="Ster"><label for="sv6">Ster</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv7" value="Boog"><label for="sv7">Boog</label></div>
+                  <div class="choice"><input type="radio" name="sticker_vorm" id="sv8" value="Eigen contour"><label for="sv8">Eigen contour</label></div>
+                </div>
+                <span class="error">Kies een vorm. Twijfel je? Neem "Eigen contour".</span>
+              </div>
+              <div class="field">
+                <label for="f-smaat">Afmetingen *</label>
+                <input class="input" id="f-smaat" name="sticker_maat" placeholder="Bijvoorbeeld 8 × 8 cm" required>
+                <span class="error">Geef een maat op, ook een schatting is goed.</span>
+              </div>
+              <div class="field">
+                <label for="f-stoep">Toepassing</label>
+                <select class="select" id="f-stoep" name="sticker_toepassing">
+                  <option value="">Kies een toepassing</option>
+                  <option>Productetiket</option><option>Verpakking</option><option>Branding</option><option>Promotieactie</option><option>Evenement</option><option>Geschenk</option><option>Vereniging of club</option><option>Iets anders</option>
+                </select>
+              </div>
+              <div class="field full">
+                <span class="flabel" id="so-lbl">Ontwerp</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="so-lbl">
+                  <div class="choice"><input type="radio" name="sticker_ontwerp" id="so1" value="Ontwerp is klaar"><label for="so1">Mijn ontwerp is klaar</label></div>
+                  <div class="choice"><input type="radio" name="sticker_ontwerp" id="so2" value="Enkel logo"><label for="so2">Ik heb enkel een logo</label></div>
+                  <div class="choice"><input type="radio" name="sticker_ontwerp" id="so3" value="Nog geen ontwerp"><label for="so3">Nog geen ontwerp</label></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Badges -->
+            <div class="fields cond" data-cat="badges" hidden>
+              <div class="field full">
+                <span class="flabel" id="bt-lbl">Type *</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="bt-lbl">
+                  <div class="choice"><input type="radio" name="badge_type" id="bt1" value="Geweven badge" required><label for="bt1">Geweven badge</label></div>
+                  <div class="choice"><input type="radio" name="badge_type" id="bt2" value="Kledinglabel"><label for="bt2">Kledinglabel</label></div>
+                  <div class="choice"><input type="radio" name="badge_type" id="bt3" value="Naam- of logo-etiket"><label for="bt3">Naam- of logo-etiket</label></div>
+                  <div class="choice"><input type="radio" name="badge_type" id="bt4" value="Embleem"><label for="bt4">Embleem</label></div>
+                  <div class="choice"><input type="radio" name="badge_type" id="bt5" value="Nog niet zeker"><label for="bt5">Nog niet zeker</label></div>
+                </div>
+                <span class="error">Kies een type, of "Nog niet zeker".</span>
+              </div>
+              <div class="field">
+                <label for="f-bmaat">Afmetingen</label>
+                <input class="input" id="f-bmaat" name="badge_maat" placeholder="Bijvoorbeeld Ø 7 cm">
+              </div>
+              <div class="field">
+                <label for="f-btoep">Toepassing</label>
+                <select class="select" id="f-btoep" name="badge_toepassing">
+                  <option value="">Kies een toepassing</option>
+                  <option>Scouts of gidsen</option><option>Jeugdbeweging</option><option>Sportclub</option><option>Vereniging</option><option>Kledingmerk</option><option>Bedrijf of uniform</option><option>Evenement</option><option>Iets anders</option>
+                </select>
+              </div>
+              <div class="field full">
+                <span class="flabel" id="bv-lbl">Vorm</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="bv-lbl">
+                  <div class="choice"><input type="radio" name="badge_vorm" id="bv1" value="Rond"><label for="bv1">Rond</label></div>
+                  <div class="choice"><input type="radio" name="badge_vorm" id="bv2" value="Schild"><label for="bv2">Schild</label></div>
+                  <div class="choice"><input type="radio" name="badge_vorm" id="bv3" value="Rechthoek"><label for="bv3">Rechthoek</label></div>
+                  <div class="choice"><input type="radio" name="badge_vorm" id="bv4" value="Zeshoek"><label for="bv4">Zeshoek</label></div>
+                  <div class="choice"><input type="radio" name="badge_vorm" id="bv5" value="Eigen vorm"><label for="bv5">Eigen vorm</label></div>
+                </div>
+              </div>
+              <div class="field full">
+                <span class="flabel" id="bu-lbl">Uitvoering</span>
+                <div class="choice-row" role="radiogroup" aria-labelledby="bu-lbl">
+                  <div class="choice"><input type="radio" name="badge_uitvoering" id="bu1" value="Opnaaien"><label for="bu1">Opnaaien</label></div>
+                  <div class="choice"><input type="radio" name="badge_uitvoering" id="bu2" value="Opstrijken"><label for="bu2">Opstrijken</label></div>
+                  <div class="choice"><input type="radio" name="badge_uitvoering" id="bu3" value="Klittenband"><label for="bu3">Klittenband</label></div>
+                  <div class="choice"><input type="radio" name="badge_uitvoering" id="bu4" value="Nog niet zeker"><label for="bu4">Nog niet zeker</label></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Gemeenschappelijk -->
+            <div class="fields mt-2">
+              <div class="field">
+                <label for="f-aantal">Gewenste hoeveelheid *</label>
+                <input class="input" id="f-aantal" name="aantal" inputmode="numeric" placeholder="Bijvoorbeeld 250" required>
+                <span class="hint">Een schatting is goed genoeg.</span>
+                <span class="error">Hoeveel stuks heb je ongeveer nodig?</span>
+              </div>
+              <div class="field">
+                <label for="f-datum">Gewenste leverdatum <span class="opt">(optioneel)</span></label>
+                <input class="input" id="f-datum" name="leverdatum" type="date">
+              </div>
+              <div class="field full">
+                <label for="f-toel">Toelichting <span class="opt">(optioneel)</span></label>
+                <textarea class="textarea" id="f-toel" name="toelichting" placeholder="Ligt de uitvoering nog niet vast? Vertel hier wat je in gedachten hebt."></textarea>
+              </div>
+            </div>
+
+            <div class="form-nav">
+              <button class="btn btn--ghost" type="button" data-prev>Vorige</button>
+              <button class="btn" type="button" data-next data-arrow>Volgende stap</button>
+            </div>
+          </fieldset>
+
+          <!-- STAP 3 -->
+          <fieldset class="form-step" style="border:0;padding:0;margin:0" hidden>
+            <legend class="sr-only">Stap 3: jouw gegevens</legend>
+            <h2 tabindex="-1">Hoe bereiken we je?</h2>
+            <p class="muted">We gebruiken je gegevens enkel om je offerte op te maken en je te contacteren.</p>
+            <div class="fields">
+              <div class="field">
+                <label for="f-naam">Naam *</label>
+                <input class="input" id="f-naam" name="naam" autocomplete="name" required>
+                <span class="error">Hoe mogen we je noemen?</span>
+              </div>
+              <div class="field">
+                <label for="f-mail">E-mailadres *</label>
+                <input class="input" id="f-mail" name="email" type="email" autocomplete="email" required>
+                <span class="error">Dit e-mailadres lijkt niet te kloppen.</span>
+              </div>
+              <div class="field">
+                <label for="f-org">Bedrijf of vereniging <span class="opt">(optioneel)</span></label>
+                <input class="input" id="f-org" name="organisatie" autocomplete="organization">
+              </div>
+              <div class="field">
+                <label for="f-tel">Telefoonnummer <span class="opt">(optioneel)</span></label>
+                <input class="input" id="f-tel" name="telefoon" type="tel" autocomplete="tel">
+              </div>
+              <div class="field full">
+                <span class="flabel">Logo, ontwerp of referentie <span class="opt">(optioneel)</span></span>
+                <label class="dropzone">
+                  <input type="file" id="f-files" name="bestanden" multiple accept=".pdf,.ai,.eps,.svg,.png,.jpg,.jpeg">
+                  {{UPLOAD}}
+                  <strong>Sleep je bestanden hierheen of klik om te kiezen</strong>
+                  <span>PDF, AI, EPS, SVG, PNG of JPG</span>
+                </label>
+                <ul class="file-list" id="file-list" aria-live="polite"></ul>
+              </div>
+              <div class="field full">
+                <label for="f-opm">Bijkomende opmerkingen <span class="opt">(optioneel)</span></label>
+                <textarea class="textarea" id="f-opm" name="opmerkingen"></textarea>
+              </div>
+              <div class="field full">
+                <label class="check-field"><input type="checkbox" name="toestemming" required> Ik ga akkoord dat Waviprint mijn gegevens gebruikt om mijn offerte op te maken.</label>
+                <span class="error">Vink dit even aan, dan kunnen we je aanvraag verwerken.</span>
+              </div>
+            </div>
+            <p id="send-error" class="form-error" role="alert" hidden>Oeps, versturen lukte niet. Probeer het opnieuw of mail ons op celine@belgosweet.be.</p>
+            <div class="form-nav">
+              <button class="btn btn--ghost" type="button" data-prev>Vorige</button>
+              <button class="btn btn--coral" type="submit" data-arrow>Aanvraag versturen </button>
+            </div>
+          </fieldset>
+        </form>
+
+        <div class="success" id="quote-success" hidden>
+          <img class="drop-big" src="assets/img/waviprint-symbole-couleur.svg" alt="" width="120" height="120">
+          <h2 tabindex="-1">Goed ontvangen<span id="success-name"></span>!</h2>
+          <p>Je aanvraag zit veilig bij ons. We nemen contact met je op met een offerte, of om ontbrekende informatie samen af te stemmen.</p>
+          <div class="btn-row" style="justify-content:center">
+            <a class="btn" data-arrow href="index.html">Terug naar home</a>
+            <a class="btn btn--ghost" href="offerte.html">Nog een aanvraag</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="summary bezel" aria-labelledby="summary-title" data-reveal>
+      <div class="core">
+        <h3 id="summary-title">Jouw keuze</h3>
+        <div class="summary-visual" id="summary-visual" aria-hidden="true"></div>
+        <dl id="summary-list"></dl>
+        <p class="help">Liever even bellen? Céline helpt je graag op <a href="tel:+32498056674">+32 498 05 66 74</a>.</p>
+      </div>
+    </aside>
+  </div>
+</section>

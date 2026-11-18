@@ -1,0 +1,87 @@
+<section class="page-hero" aria-labelledby="ct-title" style="padding-bottom:clamp(2rem,1rem + 2vw,3.5rem)">
+  <div class="container">
+    <h1 id="ct-title" data-split>
+      <span class="split-line"><span>Zeg maar</span></span>
+      <span class="split-line accent-coral"><span>hallo.</span></span>
+    </h1>
+    <p class="lead" data-reveal style="max-width:44ch">Een vraag over een product, een bestelling of iets wat er niet tussen staat? Stuur ons een berichtje of bel gerust.</p>
+  </div>
+</section>
+
+<section class="section" style="padding-top:0" aria-label="Contactgegevens en formulier">
+  <div class="container contact-grid">
+    <div class="stack" style="--stack:1.25rem">
+      <div class="people">
+        <article class="person bezel" data-reveal><div class="core">
+          <h3>Céline Saelens</h3>
+          <span class="role">Managing Director</span>
+          <span class="bar" aria-hidden="true"></span>
+          <a href="tel:+32498056674">{{PHONE}}+32 498 05 66 74</a>
+          <a href="mailto:celine@belgosweet.be">{{MAIL}}celine@belgosweet.be</a>
+        </div></article>
+        <article class="person bezel" data-reveal><div class="core">
+          <h3>Ilias Akariou</h3>
+          <span class="role">Waviprint</span>
+          <span class="bar" aria-hidden="true"></span>
+          <a href="tel:+32489576782">{{PHONE}}+32 489 57 67 82</a>
+          <a href="mailto:ilias@belgosweet.be">{{MAIL}}ilias@belgosweet.be</a>
+        </div></article>
+      </div>
+      <article class="info-card bezel" data-reveal><div class="core">
+        <h3>Op zoek naar een prijs?</h3>
+        <p>Dan ben je sneller met het offerteformulier. Daarin vragen we meteen alles wat we nodig hebben.</p>
+        <div class="mt-2"><a class="btn btn--coral" data-arrow href="offerte.html">Offerte aanvragen</a></div>
+      </div></article>
+      <article class="bezel" data-reveal><div class="core" style="padding:1.75rem;display:flex;gap:1.25rem;align-items:center">
+        <img src="assets/img/waviprint-symbole-couleur.svg" alt="" width="56" height="56" style="width:56px;flex:none">
+        <div>
+          <h3 style="font-size:1.25rem">Waviprint · België</h3>
+          <p class="muted">Belgian custom printing. Open vanaf 1 januari 2027.</p>
+        </div>
+      </div></article>
+    </div>
+
+    <div class="form-card bezel" data-reveal>
+      <div class="core">
+        <form id="contact-form" novalidate data-endpoint="">
+          <h2 style="font-size:clamp(1.8rem,1.3rem + 1.8vw,2.6rem);margin-bottom:.6rem">Een algemene vraag</h2>
+          <p class="muted" style="margin-bottom:2rem">We antwoorden zo snel mogelijk.</p>
+          <div class="fields">
+            <div class="field">
+              <label for="c-naam">Naam *</label>
+              <input class="input" id="c-naam" name="naam" autocomplete="name" required>
+              <span class="error">Hoe mogen we je noemen?</span>
+            </div>
+            <div class="field">
+              <label for="c-mail">E-mailadres *</label>
+              <input class="input" id="c-mail" name="email" type="email" autocomplete="email" required>
+              <span class="error">Dit e-mailadres lijkt niet te kloppen.</span>
+            </div>
+            <div class="field full">
+              <label for="c-onderwerp">Waarover gaat het? <span class="opt">(optioneel)</span></label>
+              <select class="select" id="c-onderwerp" name="onderwerp">
+                <option value="">Kies een onderwerp</option>
+                <option>Metalen dozen</option><option>Stickers</option><option>Geweven etiketten en badges</option><option>Een lopende bestelling</option><option>Iets anders</option>
+              </select>
+            </div>
+            <div class="field full">
+              <label for="c-bericht">Je vraag *</label>
+              <textarea class="textarea" id="c-bericht" name="bericht" required></textarea>
+              <span class="error">Vergeet je vraag niet.</span>
+            </div>
+          </div>
+          <p id="contact-error" class="form-error" role="alert" hidden>Oeps, versturen lukte niet. Mail ons gerust rechtstreeks op celine@belgosweet.be.</p>
+          <div class="form-nav">
+            <span></span>
+            <button class="btn" type="submit" data-arrow>Versturen </button>
+          </div>
+        </form>
+        <div class="success" id="contact-success" hidden>
+          <img class="drop-big" src="assets/img/waviprint-symbole-couleur.svg" alt="" width="100" height="100" style="width:100px">
+          <h3 tabindex="-1" style="font-size:clamp(1.8rem,1.3rem + 1.8vw,2.8rem)">Bericht ontvangen!</h3>
+          <p>Bedankt voor je vraag. We laten snel iets van ons horen.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,9 @@
+SIGNATURE MAIL — mise en place dans Gmail
+
+1. Ouvrir « signature-mail.html » dans Chrome (double-clic). Compléter d'abord [SITE WEB] dans le fichier (clic droit > Ouvrir avec > TextEdit / Bloc-notes).
+2. Dans Chrome : tout sélectionner (Cmd/Ctrl + A), copier (Cmd/Ctrl + C).
+3. Gmail > Paramètres (roue dentée) > Voir tous les paramètres > Général > Signature > Créer, puis coller.
+4. Si le logo n'apparaît pas après collage : supprimer l'image et la réinsérer avec l'icône « Insérer une image » > Importer > signature-logo.png. Largeur conseillée : 180 px.
+5. Enregistrer en bas de la page.
+
+Outlook : Fichier > Options > Courrier > Signatures, même principe (copier-coller depuis le navigateur).

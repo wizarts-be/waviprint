@@ -1,0 +1,9 @@
+WAVIPRINT — COULEURS
+
+Bleu Encre  HEX #141B4D   RGB 20 27 77      CMJN 100 90 30 40  PANTONE 2766 C
+Corail      HEX #F9423A   RGB 249 66 58     CMJN 0 85 75 0     PANTONE Warm Red C
+Soleil      HEX #FFC72C   RGB 255 199 44    CMJN 0 20 90 0     PANTONE 123 C
+Ciel        HEX #8DC8E8   RGB 141 200 232   CMJN 40 5 0 0      PANTONE 2905 C
+Crème       HEX #FBF5E9   RGB 251 245 233   CMJN 0 2 7 0       — (fond, papier)
+
+Références Pantone : teintes les plus proches, à valider sur nuancier Pantone Formula Guide (coated) avant une production en ton direct.
