@@ -71,6 +71,7 @@
   const onScroll = () => {
     if (!nav) return;
     const y = window.scrollY, d = y - lastY;
+    nav.classList.toggle("is-solid", y > 40);
     lastY = y;
     if (menuOpen || y < 120) { nav.classList.remove("is-hidden"); dir = 0; travel = 0; return; }
     if (d === 0) return;
@@ -81,6 +82,7 @@
     if (dir > 0) nav.classList.add("is-hidden"); else nav.classList.remove("is-hidden");
   };
   if (lenis) lenis.on("scroll", onScroll); else window.addEventListener("scroll", onScroll, { passive: true });
+  onScroll();
 
   /* ---------- Pagina-overgang: inktgordijn met golven ---------- */
   const curtain = $(".curtain");
@@ -624,6 +626,7 @@
       if (cat === "dozen") {
         const m = params.get("model"); if (m && modelSel) { modelSel.value = MODELS.some((x) => x.id === m) ? m : ""; showCond(); }
         const d = params.get("druk"); if (d) { const r = form.querySelector(`input[name="bedrukking"][value="${d === "uv" ? "uv" : "onbedrukt"}"]`); r && (r.checked = true); showCond(); }
+        const tx = params.get("tekst"); if (tx && form.elements.ontwerp_omschrijving) form.elements.ontwerp_omschrijving.value = "Tekst op het deksel: " + tx.slice(0, 40);
         const k = params.get("kleur"); if (k) { const r = form.querySelector(`input[name="kleur"][value="${k}"]`); r && (r.checked = true); }
       }
       if (cat === "stickers") {
@@ -724,6 +727,72 @@
         gsap.to(o, { p: 30, duration: 1.6, ease: "expo.inOut", onUpdate: () => !drag && set(o.p), scrollTrigger: { trigger: wipe, start: "top 70%", once: true },
           onComplete: () => gsap.to(o, { p: 50, duration: 1, ease: "elastic.out(1, .6)", onUpdate: () => !drag && set(o.p) }) });
       }
+    }
+
+    // Zet je naam erop: live drukproef, dan "afdrukken"
+    const proof = $("#proof");
+    if (proof) {
+      const stage = $(".proof-stage"), holder = $("#proof-tin"), input = $("#proof-text"), n = $("#proof-n");
+      const go = $("#proof-go"), quote = $("#proof-quote"), live = $("#proof-live");
+      const beam = $(".proof-beam", stage), done = $(".proof-done", stage), flag = $(".proof-flag", stage);
+      const st = { text: "", shape: "rond", bg: "cream", printed: false, busy: false };
+      const MODEL = { rond: "rond-l", vierkant: "vierkant", hoog: "koker" };
+      const BGL = { cream: "crème", coral: "koraal", sun: "zon", sky: "hemelsblauw" };
+      const render = () => {
+        const t = $("[data-tin]", holder);
+        t.dataset.tin = st.shape; t.dataset.bg = st.bg; t.dataset.text = st.text || "Jouw naam";
+        window.WaviArt.tin(t);
+        n.textContent = st.text.length;
+        const u = new URLSearchParams({ cat: "dozen", model: MODEL[st.shape], kleur: "zilver", druk: "uv" });
+        if (st.text) u.set("tekst", st.text);
+        quote.href = "offerte.html?" + u.toString();
+      };
+      const toProof = () => {
+        if (!st.printed) return;
+        st.printed = false; stage.classList.remove("is-printed"); flag.textContent = "Drukproef";
+        holder.style.setProperty("--print", ".22");
+        if (hasGsap) gsap.to(done, { scale: 0, opacity: 0, duration: .3 });
+      };
+      input.addEventListener("input", () => { st.text = input.value; toProof(); render(); });
+      $$(".proof-opts button", proof).forEach((b) => b.addEventListener("click", () => {
+        st.shape = b.dataset.shape;
+        $$(".proof-opts button", proof).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        toProof(); render();
+        if (hasGsap && !reduce) gsap.fromTo(holder, { scale: .9, rotate: -4 }, { scale: 1, rotate: 0, duration: .9, ease: "elastic.out(1, .5)" });
+      }));
+      $$(".proof-colors button", proof).forEach((b) => b.addEventListener("click", () => {
+        st.bg = b.dataset.bg;
+        $$(".proof-colors button", proof).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+        toProof(); render();
+      }));
+      const print = () => {
+        if (st.busy) return;
+        if (!st.text) {
+          input.placeholder = "Eerst je naam typen…"; input.focus();
+          if (hasGsap && !reduce) gsap.fromTo(input, { x: -8 }, { x: 0, duration: .6, ease: "elastic.out(1, .3)" });
+          return;
+        }
+        st.busy = true;
+        const finish = () => {
+          st.busy = false; st.printed = true; stage.classList.add("is-printed"); flag.textContent = "UV-bedrukt";
+          live.textContent = "Je doos is bedrukt met " + st.text + " op " + BGL[st.bg] + ".";
+        };
+        if (!hasGsap || reduce) { holder.style.setProperty("--print", "1"); finish(); return; }
+        const lid = $(".lid", holder);
+        gsap.timeline({ onComplete: finish })
+          .to(holder, { scaleY: .94, scaleX: 1.03, duration: .18, ease: "power2.in", transformOrigin: "50% 100%" })
+          .to(holder, { scaleY: 1, scaleX: 1, duration: .7, ease: "elastic.out(1, .4)" })
+          .set(beam, { opacity: 1, yPercent: -60 }, .1)
+          .to(beam, { yPercent: 330, duration: 1.1, ease: "power1.inOut" }, .1)
+          .to(holder, { "--print": 1, duration: 1, ease: "power1.inOut" }, .2)
+          .to(beam, { opacity: 0, duration: .25 }, 1.05)
+          .to(lid, { y: -22, duration: .25, ease: "power2.out" }, 1.15)
+          .to(lid, { y: 0, duration: .5, ease: "bounce.out" }, 1.4)
+          .fromTo(done, { scale: 1.6, rotate: 30, opacity: 0 }, { scale: 1, rotate: -8, opacity: 1, duration: .6, ease: "back.out(2.4)" }, 1.45);
+      };
+      go.addEventListener("click", print);
+      input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); print(); } });
+      render();
     }
 
     // Stickermuur: sleep, gooi, plak

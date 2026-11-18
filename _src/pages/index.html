@@ -84,29 +84,49 @@
   </section>
 </div>
 
-<!-- SLEEP OM TE DRUKKEN -->
-<section class="wipe-sec" aria-labelledby="wipe-title">
-  <div class="container wipe-grid">
-    <div class="wipe-copy">
-      <h2 id="wipe-title" data-split>
-        <span class="split-line"><span>Sleep.</span></span>
-        <span class="split-line"><span class="c-sky">Druk.</span></span>
-        <span class="split-line"><span class="c-sun">Klaar.</span></span>
+<!-- ZET JE NAAM EROP: live UV-drukproef -->
+<section class="proof-sec" aria-labelledby="proof-title">
+  <div class="container proof-grid">
+    <div class="proof-copy">
+      <h2 id="proof-title" data-split>
+        <span class="split-line"><span>Zet je naam</span></span>
+        <span class="split-line"><span class="c-sun">erop.</span></span>
       </h2>
-      <p data-reveal>Zo werkt UV-bedrukking: de inkt gaat rechtstreeks op het metaal en hardt meteen uit onder UV-licht. Sleep de druppel en zie het verschil.</p>
-      <div class="btn-row" data-reveal>
-        <a class="btn btn--cream" data-arrow href="metalen-dozen.html?druk=onbedrukt#catalogus">Lege dozen</a>
-        <a class="btn btn--sun" data-arrow href="metalen-dozen.html?druk=uv#catalogus">Met jouw ontwerp</a>
-      </div>
+      <p data-reveal>Typ je naam of merk en druk je eigen doos af. Zo werkt UV-bedrukking: de inkt gaat rechtstreeks op het metaal en hardt meteen uit onder UV-licht.</p>
+
+      <form class="proof-ui" id="proof" data-reveal onsubmit="return false">
+        <label class="proof-field">
+          <span class="sr-only">Jouw naam of merk</span>
+          <input id="proof-text" type="text" maxlength="16" placeholder="Jouw naam of merk" autocomplete="off" spellcheck="false">
+          <span class="proof-count" aria-hidden="true"><span id="proof-n">0</span>/16</span>
+        </label>
+        <div class="proof-row">
+          <div class="proof-opts" role="group" aria-label="Vorm van de doos">
+            <button type="button" data-shape="rond" aria-pressed="true">Rond</button>
+            <button type="button" data-shape="vierkant" aria-pressed="false">Vierkant</button>
+            <button type="button" data-shape="hoog" aria-pressed="false">Koker</button>
+          </div>
+          <div class="proof-colors" role="group" aria-label="Drukkleur">
+            <button type="button" data-bg="cream" style="--sw:#FBF5E9" aria-pressed="true" aria-label="Crème"></button>
+            <button type="button" data-bg="coral" style="--sw:#F9423A" aria-pressed="false" aria-label="Koraal"></button>
+            <button type="button" data-bg="sun" style="--sw:#FFC72C" aria-pressed="false" aria-label="Zon"></button>
+            <button type="button" data-bg="sky" style="--sw:#8DC8E8" aria-pressed="false" aria-label="Hemelsblauw"></button>
+          </div>
+        </div>
+        <div class="btn-row">
+          <button type="button" class="btn btn--sun" id="proof-go" data-arrow>Druk af</button>
+          <a class="btn btn--ghost inv" id="proof-quote" data-arrow href="offerte.html?cat=dozen&druk=uv">Offerte voor deze doos</a>
+        </div>
+        <p class="sr-only" id="proof-live" aria-live="polite"></p>
+      </form>
     </div>
-    <div class="wipe" id="wipe" data-reveal>
-      <div class="wipe-layer wipe-plain"><div class="tins-scope"><div data-tin="rond" data-color="zilver" data-art="confetti" data-label="Onbedrukte ronde doos"></div></div></div>
-      <div class="wipe-layer wipe-print"><div class="tins-scope is-uv"><div data-tin="rond" data-color="zilver" data-art="confetti" data-label="Ronde doos met UV-bedrukking"></div></div></div>
-      <span class="wipe-tag l">Onbedrukt</span><span class="wipe-tag r">UV-bedrukt</span>
-      <div class="wipe-handle" role="slider" tabindex="0" aria-label="Vergelijk onbedrukt en bedrukt" aria-valuemin="0" aria-valuemax="100" aria-valuenow="50">
-        <span class="wipe-line"></span>
-        <span class="wipe-knob"><svg viewBox="0 0 100 100" aria-hidden="true"><path d="M50 4 L80 34 A42 42 0 1 1 20 34 Z" fill="#FBF5E9"/><path d="M34 62 l-8-8 8-8M66 46l8 8-8 8" fill="none" stroke="#141B4D" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
-      </div>
+
+    <div class="proof-stage" aria-hidden="true">
+      <span class="proof-plate"></span>
+      <div class="proof-tin" id="proof-tin" style="--print:.22"><div data-tin="rond" data-color="zilver" data-art="eigen" data-bg="cream" data-text="Jouw naam"></div></div>
+      <span class="proof-beam"></span>
+      <span class="proof-flag">Drukproef</span>
+      <div class="proof-done"><div data-sticker="ster" data-art="gedrukt"></div></div>
     </div>
   </div>
 </section>

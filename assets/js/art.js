@@ -57,7 +57,22 @@
     hart:      { kind: "heart", shadowY: 200 }
   };
 
+  const esc = (t) => String(t || "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const INK_ON = { cream: C.ink, coral: C.cream, sun: C.ink, sky: C.ink, ink: C.cream };
+  const ACC_ON = { cream: C.coral, coral: C.sun, sun: C.coral, sky: C.coral, ink: C.sun };
   const ART = {
+    // Ontwerp van de bezoeker: eigen tekst op een gekozen kleur
+    eigen(W, H, d = {}) {
+      const bgKey = d.bg || "cream", bg = C[bgKey] || C.cream, fg = INK_ON[bgKey] || C.ink, acc = ACC_ON[bgKey] || C.coral;
+      const cx = W / 2, cy = H / 2, r = Math.min(W, H) / 2;
+      const txt = esc((d.text || "Jouw naam").slice(0, 16));
+      const fs = Math.min(r * 0.42, (W * 1.5) / Math.max(4, txt.length));
+      let dots = "";
+      for (let i = 0; i < 20; i++) { const a = (i / 20) * Math.PI * 2; dots += `<circle cx="${cx + Math.cos(a) * r * .78}" cy="${cy + Math.sin(a) * r * .78}" r="${r * .03}" fill="${acc}"/>`; }
+      return `<rect width="${W}" height="${H}" fill="${bg}"/>${dots}
+        <path d="${wavePath(W * 1.4, cy + fs * .62, r * .16, r * .05)}" transform="translate(${-W * .2} 0)" fill="none" stroke="${acc}" stroke-width="${r * .05}" stroke-linecap="round"/>
+        <text x="${cx}" y="${cy + fs * .3}" text-anchor="middle" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="${fs}" letter-spacing="-1" fill="${fg}">${txt}</text>`;
+    },
     // Voorbeeldontwerpen zoals een klant ze zou aanleveren (UV-bedrukking)
     bakkerij(W, H) {
       const cx = W / 2, cy = H / 2, r = Math.min(W, H) / 2;
@@ -108,6 +123,21 @@
     }
   };
 
+  // Eigen tekst op de zijkant van de doos
+  const sideLabel = (d) => esc((d.text || "Jouw naam").slice(0, 16)).toUpperCase();
+  function sideTextArc(cx, rx, ry, y, bh, d) {
+    const pid = id("sp"), txt = sideLabel(d), bg = d.bg || "cream";
+    const fs = Math.min(bh * .52, (rx * 2.4) / Math.max(4, txt.length) * 1.25);
+    // boog volgt de voorkant van de cilinder; tekst zit gecentreerd op de baseline
+    return `<defs><path id="${pid}" d="M${cx - rx * .96} ${y + fs * .34} A${rx} ${ry} 0 0 0 ${cx + rx * .96} ${y + fs * .34}"/></defs>
+      <text class="print" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="${fs.toFixed(1)}" letter-spacing="${(fs * .08).toFixed(1)}" fill="${INK_ON[bg] || C.ink}"><textPath href="#${pid}" startOffset="50%" text-anchor="middle">${txt}</textPath></text>`;
+  }
+  function sideTextFlat(cx, y, w, bh, d) {
+    const txt = sideLabel(d), bg = d.bg || "cream";
+    const fs = Math.min(bh * .52, (w * 1.3) / Math.max(4, txt.length));
+    return `<text class="print" x="${cx}" y="${y + fs * .34}" text-anchor="middle" font-family="Bricolage Grotesque, Arial Black, sans-serif" font-weight="800" font-size="${fs.toFixed(1)}" letter-spacing="${(fs * .08).toFixed(1)}" fill="${INK_ON[bg] || C.ink}">${txt}</text>`;
+  }
+
   function tin(el) {
     const shape = SHAPES[el.dataset.tin] || SHAPES.rond;
     const m = METAL[el.dataset.color] || METAL.zilver;
@@ -137,8 +167,8 @@
       shadow = `<ellipse cx="${cx}" cy="${bBot + 6}" rx="${bodyRx * 1.15}" ry="${ry * .75}" fill="url(#${g.sh})"/>`;
       body = `<path d="M${cx - bodyRx} ${bTop} V${bBot} A${bodyRx} ${ry * bodyRx / rx} 0 0 0 ${cx + bodyRx} ${bBot} V${bTop} Z" fill="url(#${g.body})"/>`;
       const by = bTop + bodyD * .32, bh = bodyD * .42, bry = ry * bodyRx / rx;
-      bodyPrint = `<path class="print" d="M${cx - bodyRx} ${by} V${by + bh} A${bodyRx} ${bry} 0 0 0 ${cx + bodyRx} ${by + bh} V${by} A${bodyRx} ${bry} 0 0 1 ${cx - bodyRx} ${by} Z" fill="${artName === "thee" ? C.ink : artName === "strepen" ? C.coral : artName === "bakkerij" ? C.coral : C.sky}" opacity=".95"/>
-        <path class="print" d="M${cx - bodyRx} ${by + bh * .5} A${bodyRx} ${bry} 0 0 0 ${cx + bodyRx} ${by + bh * .5}" fill="none" stroke="${C.sun}" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>`;
+      bodyPrint = `<path class="print" d="M${cx - bodyRx} ${by} V${by + bh} A${bodyRx} ${bry} 0 0 0 ${cx + bodyRx} ${by + bh} V${by} A${bodyRx} ${bry} 0 0 1 ${cx - bodyRx} ${by} Z" fill="${artName === "eigen" ? (C[el.dataset.bg] || C.cream) : artName === "thee" ? C.ink : artName === "strepen" ? C.coral : artName === "bakkerij" ? C.coral : C.sky}" opacity=".95"/>
+        ${artName === "eigen" ? sideTextArc(cx, bodyRx, bry, by + bh * .5, bh, el.dataset) : `<path class="print" d="M${cx - bodyRx} ${by + bh * .5} A${bodyRx} ${bry} 0 0 0 ${cx + bodyRx} ${by + bh * .5}" fill="none" stroke="${C.sun}" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>`}`;
       lidSide = `<path d="M${cx - rx} ${lt} V${lt + lidD} A${rx} ${ry} 0 0 0 ${cx + rx} ${lt + lidD} V${lt} Z" fill="url(#${g.lid})"/>
         <path d="M${cx - rx} ${lt + lidD} A${rx} ${ry} 0 0 0 ${cx + rx} ${lt + lidD}" fill="none" stroke="${C.ink}" stroke-opacity=".18" stroke-width="1.2"/>`;
       lidTop = `<ellipse cx="${cx}" cy="${lt}" rx="${rx}" ry="${ry}" fill="url(#${g.top})"/>
@@ -147,7 +177,7 @@
       const W = rx * 2 * .86, H = W;
       topArt = `<g class="print"><g transform="translate(${cx - W / 2} ${lt - ry * .86}) scale(1 ${tilt * (ry / (rx * tilt)) })">
         <clipPath id="${g.clip}"><circle cx="${W / 2}" cy="${H / 2}" r="${W / 2}"/></clipPath>
-        <g clip-path="url(#${g.clip})">${art(W, H)}</g></g></g>`;
+        <g clip-path="url(#${g.clip})">${art(W, H, el.dataset)}</g></g></g>`;
       shine = `<ellipse cx="${cx - rx * .35}" cy="${lt - ry * .35}" rx="${rx * .35}" ry="${ry * .22}" fill="#fff" opacity=".22"/>`;
     }
 
@@ -159,8 +189,8 @@
       body = `<rect x="${bx}" y="${bTop}" width="${bw}" height="${bBot - bTop}" rx="${r}" ry="${ry * 2.2}" fill="url(#${g.body})"/>`;
       if (shape.hinge) body += `<path d="M${bx + 6} ${top + faceH + lidD + 1} H${bx + bw - 6}" stroke="${C.ink}" stroke-opacity=".25" stroke-width="1.4"/>`;
       const by = top + faceH + lidD + bodyD * .25, bh = bodyD * .5;
-      if (bodyD > 30) bodyPrint = `<rect class="print" x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${artName === "thee" ? C.ink : artName === "strepen" ? C.coral : C.sky}" opacity=".95"/>
-        <path class="print" d="M${bx + 8} ${by + bh / 2} H${bx + bw - 8}" stroke="${C.sun}" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>`;
+      if (bodyD > 30) bodyPrint = `<rect class="print" x="${bx}" y="${by}" width="${bw}" height="${bh}" fill="${artName === "eigen" ? (C[el.dataset.bg] || C.cream) : artName === "thee" ? C.ink : artName === "strepen" ? C.coral : C.sky}" opacity=".95"/>
+        ${artName === "eigen" ? sideTextFlat(bx + bw / 2, by + bh / 2, bw, bh, el.dataset) : `<path class="print" d="M${bx + 8} ${by + bh / 2} H${bx + bw - 8}" stroke="${C.sun}" stroke-width="3" stroke-dasharray="2 7" stroke-linecap="round"/>`}`;
       lidSide = `<rect x="${x}" y="${top + faceH / 2}" width="${w}" height="${faceH / 2 + lidD}" rx="${r}" ry="${ry * 2.4}" fill="url(#${g.lid})"/>
         <path d="M${x + r} ${top + faceH + lidD} H${x + w - r}" stroke="${C.ink}" stroke-opacity=".16" stroke-width="1.2"/>`;
       lidTop = `<rect x="${x}" y="${top}" width="${w}" height="${faceH}" rx="${r}" ry="${ry * 2.4}" fill="url(#${g.top})"/>
@@ -168,7 +198,7 @@
       const W = w - 16, Hs = faceH - 6, H = Hs / tilt;
       topArt = `<g class="print"><g transform="translate(${x + 8} ${top + 3}) scale(1 ${tilt})">
         <clipPath id="${g.clip}"><rect width="${W}" height="${H}" rx="${r * .7}" ry="${r * .7 * 2}"/></clipPath>
-        <g clip-path="url(#${g.clip})">${art(W, H)}</g></g></g>`;
+        <g clip-path="url(#${g.clip})">${art(W, H, el.dataset)}</g></g></g>`;
       shine = `<rect x="${x + w * .08}" y="${top + 2}" width="${w * .4}" height="${faceH * .28}" rx="${faceH * .14}" fill="#fff" opacity=".18"/>`;
     }
 
@@ -186,7 +216,7 @@
         <path d="${hp}" transform="translate(${ox + 10} ${oy + 6}) scale(.9 ${ty * .9})" fill="none" stroke="${m.d}" stroke-opacity=".35" stroke-width="1.2"/>`;
       topArt = `<g class="print"><g transform="translate(${ox} ${oy}) scale(1 ${ty})">
         <clipPath id="${g.clip}"><path d="${hp}" transform="translate(10 10) scale(.9)"/></clipPath>
-        <g clip-path="url(#${g.clip})"><g transform="translate(0 0)">${art(200, 190)}</g></g></g></g>`;
+        <g clip-path="url(#${g.clip})"><g transform="translate(0 0)">${art(200, 190, el.dataset)}</g></g></g></g>`;
       shine = `<ellipse cx="70" cy="${oy + 30}" rx="28" ry="9" fill="#fff" opacity=".22"/>`;
     }
 
@@ -217,6 +247,7 @@
 
   const STICKER_ART = {
     gebakken: { bg: C.coral, fg: C.cream, l1: "Vers", l2: "gebakken", acc: C.sun },
+    gedrukt:  { bg: C.coral, fg: C.cream, l1: "Gedrukt!", l2: "", acc: C.sun },
     merci:    { bg: C.sun, fg: C.ink, l1: "Merci!", l2: "", acc: C.coral },
     club:     { bg: C.ink, fg: C.sun, l1: "Club", l2: "sinds 1923", acc: C.coral },
     handmade: { bg: C.sky, fg: C.ink, l1: "Handmade", l2: "in België", acc: C.coral },
