@@ -249,7 +249,7 @@
     gebakken: { bg: C.coral, fg: C.cream, l1: "Vers", l2: "gebakken", acc: C.sun },
     gedrukt:  { bg: C.coral, fg: C.cream, l1: "Gedrukt!", l2: "", acc: C.sun },
     merci:    { bg: C.sun, fg: C.ink, l1: "Merci!", l2: "", acc: C.coral },
-    club:     { bg: C.ink, fg: C.sun, l1: "Club", l2: "sinds 1923", acc: C.coral },
+    club:     { bg: C.ink, fg: C.sun, l1: "Jouw", l2: "club", acc: C.coral },
     handmade: { bg: C.sky, fg: C.ink, l1: "Handmade", l2: "in België", acc: C.coral },
     promo:    { bg: C.coral, fg: C.ink, l1: "−20%", l2: "deze week", acc: C.sun },
     bio:      { bg: C.cream, fg: C.ink, l1: "100%", l2: "natuurlijk", acc: C.coral },

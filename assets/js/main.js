@@ -848,7 +848,7 @@
     const posters = $$(".poster");
     posters.forEach((p, i) => {
       const next = posters[i + 1];
-      if (next) gsap.to($(".poster-inner", p), { scale: .94, opacity: .45, ease: "none", scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true } });
+      if (next) gsap.to($(".poster-inner", p), { scale: .96, opacity: .08, ease: "none", scrollTrigger: { trigger: next, start: "top bottom", end: "top 40%", scrub: true } });
       gsap.from($(".poster-word", p), { yPercent: 40, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: p, start: "top 75%", once: true } });
     });
     // Dozen: deksels gaan open op de scroll
