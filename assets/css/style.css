@@ -1380,17 +1380,25 @@ a, button, [role="tab"], .choice label, .cat-option label, .x-col, .wi { cursor:
 .nav .nav-cta:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
 
 /* One-pager: offerteformulier in het slotblok */
-@media (min-width: 1000px) { .cta-inner.cta-inner--form { grid-template-columns: 1fr minmax(0, 1.05fr); align-items: start; } }
-.cta-inner--form .form-card { width: 100%; }
+@media (min-width: 1000px) { .cta-inner.cta-inner--form { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: stretch; gap: clamp(2.5rem, 1rem + 3vw, 5rem); } }
+.cta-inner--form > .stack { justify-self: stretch; display: flex; flex-direction: column; gap: 1.5rem; min-width: 0; }
+.cta-block .cta-inner--form h2 { font-size: clamp(2.6rem, 1rem + 4vw, 5.4rem); max-width: none; }
+.cta-block .cta-inner--form .lead { color: var(--ink); font-size: clamp(1.5rem, 1.3rem + .5vw, 1.75rem); line-height: 1.4; max-width: 26ch; margin: 0; }
+.cta-inner--form .form-card { width: 100%; min-width: 0; }
 .cta-inner--form .form-card .core { background: var(--cream); }
 .cta-inner--form .form-title { font-size: clamp(1.6rem, 1.2rem + 1.4vw, 2.2rem); margin-bottom: 1.5rem; }
 .cta-inner--form fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 .cta-inner--form legend { padding: 0; margin-bottom: .5rem; }
 .cta-inner--form .form-nav { margin-top: 1.75rem; padding-top: 1.25rem; align-items: center; }
+.cta-inner--form .form-nav .muted { color: var(--ink-80); }
 .cta-inner--form .success { box-shadow: none; }
-.cta-direct { list-style: none; padding: 0; margin: 0; display: grid; gap: .6rem; }
+.cta-steps { margin-top: auto; background: var(--cream); color: var(--ink); border: 2px solid var(--ink); border-radius: 1.25rem; box-shadow: 5px 5px 0 var(--ink); padding: clamp(1.25rem, 1rem + 1vw, 2rem); display: grid; gap: 1.5rem; }
+.cta-steps ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
+.cta-steps ol > li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 1rem; align-items: start; }
+.cta-steps b { width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--ink); color: var(--cream); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.1rem; }
+.cta-steps strong { display: block; font-size: 1.05rem; font-weight: 600; }
+.cta-steps ol span { display: block; color: var(--ink-80); font-size: .95rem; line-height: 1.5; margin-top: .15rem; }
+.cta-direct { list-style: none; padding: 1.25rem 0 0; margin: 0; display: flex; flex-wrap: wrap; gap: .75rem 2rem; border-top: 1px solid var(--line); }
 .cta-direct a { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid transparent; transition: border-color .25s; }
 .cta-direct a:hover { border-color: var(--ink); }
 .cta-direct svg { width: 1.2rem; height: 1.2rem; flex: none; }
-.cta-block .cta-inner--form h2 { font-size: clamp(2.8rem, 1.2rem + 4.4vw, 6rem); max-width: none; }
-.cta-inner--form .cta-direct { margin-top: .75rem; }
