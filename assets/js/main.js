@@ -649,6 +649,14 @@
       const btn = form.querySelector('[type="submit"]'); btn.disabled = true;
       try {
         if (form.dataset.endpoint) { const r = await fetch(form.dataset.endpoint, { method: "POST", body: new FormData(form) }); if (!r.ok) throw 0; }
+        else if (form.dataset.mailto) {
+          // Geen formulier-backend: open de mail met de aanvraag al ingevuld
+          const fd = new FormData(form);
+          const subject = `Offerte aanvragen: ${fd.get("product") || "Waviprint"}`;
+          const body = [`Product: ${fd.get("product") || "-"}`, `Naam: ${fd.get("naam")}`, `E-mail: ${fd.get("email")}`, "", fd.get("bericht")].join("\n");
+          window.location.href = `mailto:${form.dataset.mailto}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+          const sp = $("#contact-success p"); sp && (sp.textContent = "Je mailprogramma opent met je aanvraag erin. Klik daar nog op versturen.");
+        }
         else await new Promise((r) => setTimeout(r, 700));
         form.hidden = true;
         const s = $("#contact-success"); s.hidden = false; s.querySelector("h3").focus();

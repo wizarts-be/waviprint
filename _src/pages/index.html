@@ -119,18 +119,61 @@
   </div>
 </section>
 
-<!-- CTA -->
+<!-- CTA + OFFERTEFORMULIER -->
 <section class="cta-block" id="contact" aria-labelledby="cta-title">
-  <div class="container cta-inner">
-    <h2 id="cta-title" data-split>
-      <span class="split-line"><span>Iets moois</span></span>
-      <span class="split-line"><span>in gedachten?</span></span>
-    </h2>
-    <div class="stack" data-reveal>
-      <p class="lead">Vertel ons wat je nodig hebt. We sturen je een offerte op maat.</p>
-      <div class="btn-row">
-        <a class="btn" data-arrow data-magnetic href="mailto:celine@belgosweet.be?subject=Offerte%20aanvragen">Mail Céline</a>
-        <a class="btn btn--ghost" href="tel:+32498056674">Bel +32 498 05 66 74</a>
+  <div class="container cta-inner cta-inner--form">
+    <div class="stack">
+      <h2 id="cta-title" data-split>
+        <span class="split-line"><span>Iets moois</span></span>
+        <span class="split-line"><span>in gedachten?</span></span>
+      </h2>
+      <p class="lead" data-reveal>Vertel ons wat je nodig hebt. We sturen je een offerte op maat.</p>
+      <ul class="cta-direct" data-reveal>
+        <li><a href="mailto:celine@belgosweet.be">{{MAIL}}celine@belgosweet.be</a></li>
+        <li><a href="tel:+32498056674">{{PHONE}}+32 498 05 66 74</a></li>
+      </ul>
+    </div>
+
+    <div class="form-card bezel" data-reveal>
+      <div class="core">
+        <form id="contact-form" novalidate data-endpoint="" data-mailto="celine@belgosweet.be">
+          <h3 class="form-title">Offerte aanvragen</h3>
+          <div class="fields">
+            <fieldset class="field full">
+              <legend class="flabel">Waarvoor?</legend>
+              <div class="choice-row">
+                <span class="choice"><input type="radio" id="q-dozen" name="product" value="Metalen dozen" checked><label for="q-dozen">Metalen dozen</label></span>
+                <span class="choice"><input type="radio" id="q-stickers" name="product" value="Stickers"><label for="q-stickers">Stickers</label></span>
+                <span class="choice"><input type="radio" id="q-badges" name="product" value="Geweven etiketten en badges"><label for="q-badges">Etiketten en badges</label></span>
+              </div>
+            </fieldset>
+            <div class="field">
+              <label for="c-naam">Naam *</label>
+              <input class="input" id="c-naam" name="naam" autocomplete="name" required>
+              <span class="error">Hoe mogen we je noemen?</span>
+            </div>
+            <div class="field">
+              <label for="c-mail">E-mailadres *</label>
+              <input class="input" id="c-mail" name="email" type="email" autocomplete="email" required>
+              <span class="error">Dit e-mailadres lijkt niet te kloppen.</span>
+            </div>
+            <div class="field full">
+              <label for="c-bericht">Wat heb je nodig? *</label>
+              <textarea class="textarea" id="c-bericht" name="bericht" rows="4" placeholder="Bijvoorbeeld: 200 ronde dozen met ons logo, tegen half maart." required></textarea>
+              <span class="error">Vertel kort wat je zoekt.</span>
+            </div>
+          </div>
+          <p id="contact-error" class="form-error" role="alert" hidden>Oeps, versturen lukte niet. Mail ons gerust rechtstreeks op celine@belgosweet.be.</p>
+          <div class="form-nav">
+            <span class="muted">We antwoorden binnen twee werkdagen.</span>
+            <button class="btn btn--coral" type="submit" data-arrow>Versturen</button>
+          </div>
+        </form>
+        <div class="success" id="contact-success" hidden>
+          <img class="drop-big" src="assets/img/waviprint-symbole-couleur.svg" alt="" width="80" height="80" style="width:80px">
+          <h3 tabindex="-1">Bedankt!</h3>
+          <p>Je aanvraag staat klaar. We sturen je snel een offerte.</p>
+        </div>
       </div>
     </div>
   </div>
