@@ -33,8 +33,8 @@ MENU = [
     ("metalen-dozen", "Metalen dozen"),
     ("stickers", "Stickers"),
     ("geweven-etiketten-badges", "Geweven etiketten en badges"),
-    ("offerte", "Offerte aanvragen"),
     ("contact", "Contact"),
+    ("offerte", "Offerte aanvragen"),
 ]
 
 def href(slug):
@@ -69,9 +69,11 @@ def head(title, desc, slug):
 def cur(s, slug):
     return ' aria-current="page"' if s == slug else ""
 
+QUOTE_CLS = ' class="nav-quote"'
+
 def nav(slug):
     links = "\n".join(
-        f'        <li><a href="{href(s)}"{cur(s, slug)}>{label}</a></li>'
+        f'        <li><a href="{href(s)}"{cur(s, slug)}{QUOTE_CLS if s == "offerte" else ""}>{label}</a></li>'
         for s, label in NAV)
     menu = "\n".join(
         f'      <li><a href="{href(s)}"{cur(s, slug)}>{label}</a></li>'

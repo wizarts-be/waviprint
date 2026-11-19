@@ -251,9 +251,9 @@
     merci:    { bg: C.sun, fg: C.ink, l1: "Merci!", l2: "", acc: C.coral },
     club:     { bg: C.ink, fg: C.sun, l1: "Jouw", l2: "club", acc: C.coral },
     handmade: { bg: C.sky, fg: C.ink, l1: "Handmade", l2: "in België", acc: C.coral },
-    promo:    { bg: C.coral, fg: C.ink, l1: "−20%", l2: "deze week", acc: C.sun },
+    promo:    { bg: C.coral, fg: C.ink, l1: "Nieuw!", l2: "", acc: C.sun },
     bio:      { bg: C.cream, fg: C.ink, l1: "100%", l2: "natuurlijk", acc: C.coral },
-    event:    { bg: C.ink, fg: C.cream, l1: "Fest", l2: "2027", acc: C.sun },
+    event:    { bg: C.ink, fg: C.cream, l1: "Fest", l2: "", acc: C.sun },
     ontwerp:  { bg: C.sun, fg: C.ink, l1: "Jouw", l2: "ontwerp", acc: C.coral },
     ontwerp2: { bg: C.coral, fg: C.cream, l1: "Jouw", l2: "ontwerp", acc: C.sun },
     ontwerp3: { bg: C.sky, fg: C.ink, l1: "Jouw", l2: "ontwerp", acc: C.coral },
@@ -292,15 +292,15 @@
   };
 
   const BADGE_ART = {
-    scouts:  { bg: C.sun, border: C.ink, fg: C.ink, t1: "SCOUTS", t2: "Est. 1958", icon: "tent" },
-    gidsen:  { bg: C.sky, border: C.ink, fg: C.ink, t1: "GIDSEN", t2: "Tak 2027", icon: "star" },
+    scouts:  { bg: C.sun, border: C.ink, fg: C.ink, t1: "SCOUTS", t2: "", icon: "tent" },
+    gidsen:  { bg: C.sky, border: C.ink, fg: C.ink, t1: "GIDSEN", t2: "", icon: "star" },
     club:    { bg: C.ink, border: C.coral, fg: C.cream, t1: "FC LINDE", t2: "", icon: "ball" },
-    kamp:    { bg: C.cream, border: C.coral, fg: C.ink, t1: "ZOMERKAMP", t2: "2027", icon: "mountain" },
+    kamp:    { bg: C.cream, border: C.coral, fg: C.ink, t1: "ZOMERKAMP", t2: "", icon: "mountain" },
     merk:    { bg: C.ink, border: C.ink, fg: C.cream, t1: "atelier noor", t2: "", icon: "" },
     merk2:   { bg: C.cream, border: C.cream, fg: C.ink, t1: "Studio Fiets", t2: "100% katoen", icon: "" },
     bedrijf: { bg: C.cream, border: C.ink, fg: C.ink, t1: "CREW", t2: "Event team", icon: "drop" },
     naam:    { bg: C.paper, border: C.paper, fg: C.ink, t1: "Lotte V.", t2: "", icon: "" },
-    jeugd:   { bg: C.coral, border: C.sun, fg: C.cream, t1: "CHIRO", t2: "Groep 12", icon: "flame" },
+    jeugd:   { bg: C.coral, border: C.sun, fg: C.cream, t1: "JEUGD", t2: "", icon: "flame" },
     ontwerp: { bg: C.sun, border: C.ink, fg: C.ink, t1: "JOUW", t2: "ontwerp", icon: "drop" }
   };
 

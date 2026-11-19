@@ -18,11 +18,10 @@
     { id: "rond-s", photo: "rond-s", name: "Ronde doos S", shape: "rond_s", vorm: "rond", size: "Ø 100 × 45 mm", colors: ["zilver", "goud", "wit", "zwart"], art: "bakkerij", use: "Koekjes, snoep, kaarsen" },
     { id: "rond-l", photo: "rond-l", name: "Ronde doos L", shape: "rond", vorm: "rond", size: "Ø 150 × 70 mm", colors: ["goud", "zilver", "wit", "inkt"], art: "confetti", use: "Koekjes, chocolade, geschenken" },
     { id: "rechthoek", photo: "rechthoek", name: "Rechthoekige doos", shape: "rechthoek", vorm: "rechthoekig", size: "160 × 110 × 50 mm", colors: ["zwart", "zilver", "goud", "wit"], art: "strepen", use: "Pralines, relatiegeschenken" },
-    { id: "plat", name: "Platte doos", shape: "plat", vorm: "rechthoekig", size: "190 × 60 × 20 mm", colors: ["zwart", "zilver", "inkt"], art: "cadeau", use: "Chocoladerepen, pennen, accessoires" },
+    { id: "plat", photo: "plat", name: "Platte doos", shape: "plat", vorm: "rechthoekig", size: "190 × 60 × 20 mm", colors: ["zwart", "zilver", "inkt"], art: "cadeau", use: "Chocoladerepen, pennen, accessoires" },
     { id: "vierkant", photo: "vierkant", name: "Vierkante doos", shape: "vierkant", vorm: "vierkant", size: "120 × 120 × 70 mm", colors: ["wit", "zilver", "goud", "koraal"], art: "thee", use: "Thee, koffie, cosmetica" },
-    { id: "hart", name: "Hartvormige doos", shape: "hart", vorm: "hart", size: "140 × 130 × 45 mm", colors: ["koraal", "zilver", "goud", "wit"], art: "cadeau", use: "Pralines, huwelijk, Valentijn" },
     { id: "koker", photo: "koker", name: "Hoge koker", shape: "hoog", vorm: "rond", size: "Ø 75 × 120 mm", colors: ["zilver", "goud", "zwart", "inkt"], art: "thee", use: "Thee, koffie, kruiden" },
-    { id: "scharnier", name: "Scharnierdoos", shape: "scharnier", vorm: "rechthoekig", size: "95 × 60 × 20 mm", colors: ["zilver", "zwart", "wit", "koraal"], art: "strepen", use: "Pepermunt, balsem, kleine accessoires" }
+    { id: "scharnier", photo: "scharnier", name: "Scharnierdoos", shape: "scharnier", vorm: "rechthoekig", size: "95 × 60 × 20 mm", colors: ["zilver", "zwart", "wit", "koraal"], art: "strepen", use: "Pepermunt, balsem, kleine accessoires" }
   ];
   const COLOR_LABEL = { zilver: "Zilver", goud: "Goud", wit: "Wit", zwart: "Zwart", inkt: "Inktblauw", koraal: "Koraal" };
   const COLOR_HEX = { zilver: "#D3D7DE", goud: "#D9B661", wit: "#FFFFFF", zwart: "#2B2F3B", inkt: "#141B4D", koraal: "#F9423A" };
@@ -325,7 +324,7 @@
               ${m.colors.map((c, i) => `<button type="button" class="swatch" style="--sw:${COLOR_HEX[c]}" data-color="${c}" aria-pressed="${i === 0}" aria-label="${COLOR_LABEL[c]}"></button>`).join("")}
             </div>
           </div>
-          <p class="model-note">Foto: ${shown}. De gekozen kleur geef je mee in je offerte.</p>
+          <p class="model-note">De foto is een voorbeeld. De gekozen kleur geef je mee in je offerte.</p>
           <a class="btn btn--sm model-cta" data-arrow data-quote-link href="${quoteUrl(m, m.colors[0], "onbedrukt")}">Offerte voor dit model</a>
         </div>
       </article>`;

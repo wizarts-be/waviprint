@@ -1308,3 +1308,73 @@ body:has(.md-hero) .nav:not(.is-solid) .logo-inv { opacity: 0; }
 .md-hero--light .md-hero-title .split-line + .split-line > span { background: var(--sun); }
 .md-hero--light .md-hero-title .split-line { display: block; }
 .md-hero--light .md-hero-title .split-line > span { display: inline-block; width: fit-content; }
+
+/* Menu volgens de briefing: Offerte aanvragen in de balk, als opvallend item */
+.nav-links a.nav-quote { background: var(--coral); color: var(--ink) !important; box-shadow: inset 0 0 0 1.5px var(--ink); }
+.nav-links a.nav-quote[aria-current="page"] { background: var(--ink); color: var(--cream) !important; }
+@media (min-width: 1080px) { .nav-inner { grid-template-columns: 1fr auto 1fr; } }
+.story-text { font-size: clamp(1.5rem, 1rem + 1.9vw, 2.8rem); line-height: 1.18 !important; }
+
+.company-card .core { padding: 1.5rem; background: #FFFFFF; }
+.company-card h3 { font-size: 1.4rem; margin-bottom: .75rem; }
+.company-dl { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.25rem; margin: 0; }
+.company-dl dt { font-weight: 600; }
+.company-dl dd { margin: 0; }
+.nav-links a { white-space: nowrap; }
+
+/* ==========================================================================
+   Interactie: duidelijke primaire keuze + hover overal
+   ========================================================================== */
+/* Eigen muiscursor weg: hij bedekte knoppen en het logo */
+.ink-cursor { display: none !important; }
+html, body, a, button, .wall { cursor: auto; }
+a, button, [role="tab"], .choice label, .cat-option label, .x-col, .wi { cursor: pointer; }
+
+/* Menu */
+.nav-links a { transition: background-color .2s ease, color .2s ease, box-shadow .2s ease; }
+.nav-links a:not([aria-current="page"]):not(.nav-quote):hover { background: var(--sun) !important; color: var(--ink) !important; }
+.nav-links a.nav-quote:hover { background: var(--ink) !important; color: var(--cream) !important; }
+
+/* Schakelaars, filters, keuzes: geselecteerd = gevuld + schaduw (primair), anders = rand, hover = Soleil */
+.poster .segment button, .page-metalen-dozen .mini-seg button, .page-metalen-dozen .filter-pills button, .choice label {
+  background: #FFFFFF !important; color: var(--ink) !important; border: 1.5px solid var(--ink) !important;
+  box-shadow: none !important; transform: none !important;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease, color .15s ease !important;
+}
+.poster .segment button:hover, .page-metalen-dozen .mini-seg button:hover, .page-metalen-dozen .filter-pills button:hover, .choice label:hover {
+  background: var(--sun) !important; transform: translate(-2px, -2px) !important; box-shadow: 3px 3px 0 var(--ink) !important;
+}
+.poster .segment button[aria-pressed="true"], .page-metalen-dozen .mini-seg button[aria-pressed="true"], .page-metalen-dozen .filter-pills button[aria-pressed="true"], .choice input:checked + label {
+  background: var(--ink) !important; color: var(--cream) !important; transform: translate(-2px, -2px) !important; box-shadow: 3px 3px 0 var(--coral) !important;
+}
+.choice input:checked + label i { box-shadow: inset 0 0 0 1px var(--cream); }
+
+/* Categorie-keuze in het offerteformulier */
+.cat-option label { box-shadow: none !important; transform: none !important; background: #FFFFFF !important; }
+.cat-option label:hover { background: var(--sun) !important; transform: translate(-3px, -3px) !important; box-shadow: 5px 5px 0 var(--ink) !important; }
+.cat-option input:checked + label { background: var(--sun) !important; transform: translate(-3px, -3px) !important; box-shadow: 5px 5px 0 var(--ink) !important; outline: 3px solid var(--ink); outline-offset: -3px; }
+
+/* Kaarten en tegels die naar een pagina leiden */
+.x-col { transition: filter .2s ease; }
+.footer a:hover, .catalog-note a:hover, .proof-real a:hover { color: var(--sun); }
+.faq summary:hover { color: var(--coral); }
+
+/* Menubalk uitgelijnd op dezelfde randen als de inhoud (.container) */
+.nav { padding-left: 0 !important; padding-right: 0 !important; }
+.nav-inner { box-sizing: border-box; width: 100%; max-width: var(--max); margin-inline: auto; padding-inline: var(--gutter) !important; }
+/* CTA als laatste item in de balk, met extra ruimte ervoor */
+
+/* Menubalk: logo links, menu in het midden, CTA-knop rechts (uitgelijnd op de inhoud) */
+@media (max-width: 1339px) { .nav-inner > nav, .nav-cta { display: none !important; } .nav-toggle { display: block !important; } .nav-inner { grid-template-columns: 1fr auto !important; } }
+@media (min-width: 1340px) { .nav-inner { grid-template-columns: 1fr auto 1fr !important; } .nav-links { display: flex !important; } .nav-cta { display: inline-flex !important; justify-self: end; } .nav-inner > nav { justify-self: center; } .nav-toggle { display: none !important; } }
+.nav-cta { white-space: nowrap; }
+
+/* Offerte-knop in de menubalk: zelfde gedrag als alle knoppen, op elke pagina */
+.nav .nav-cta, .nav:not(.is-solid) .nav-cta {
+  background: var(--coral) !important; color: var(--ink) !important;
+  border: var(--edge); box-shadow: 4px 4px 0 var(--ink) !important;
+  transition: transform .15s ease, box-shadow .15s ease, background-color .15s ease !important;
+}
+.nav .nav-cta:hover, .nav:not(.is-solid) .nav-cta:hover { background: var(--sun) !important; transform: translate(-2px, -2px); box-shadow: 6px 6px 0 var(--ink) !important; }
+.nav .nav-cta:active { transform: translate(4px, 4px); box-shadow: 0 0 0 var(--ink) !important; }
+.nav .nav-cta:focus-visible { outline: 3px solid var(--sky); outline-offset: 3px; }
