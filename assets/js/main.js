@@ -109,6 +109,18 @@
     const a = e.target.closest("a");
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     const href = a.getAttribute("href");
+    // Ankerlinks: zacht naar de sectie scrollen
+    if (href && href.length > 1 && href.startsWith("#")) {
+      const target = document.getElementById(href.slice(1));
+      if (!target) return;
+      e.preventDefault();
+      if (lenis) lenis.scrollTo(href === "#top" ? 0 : target, { duration: 1.2 });
+      else if (href === "#top") window.scrollTo({ top: 0, behavior: reduce ? "auto" : "smooth" });
+      else target.scrollIntoView({ behavior: reduce ? "auto" : "smooth" });
+      if (!target.hasAttribute("tabindex")) target.setAttribute("tabindex", "-1");
+      target.focus({ preventScroll: true });
+      return;
+    }
     if (!href || href.startsWith("#") || href.startsWith("mailto:") || href.startsWith("tel:") || a.target === "_blank" || a.hasAttribute("download")) return;
     const url = new URL(a.href, location.href);
     if (url.origin !== location.origin) return;

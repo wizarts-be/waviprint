@@ -8,37 +8,21 @@ SRC = pathlib.Path(__file__).parent / "pages"
 PAGES = [
     ("index", "Waviprint · Metalen dozen, stickers en geweven badges op maat",
      "Waviprint is een Belgisch bedrijf voor metalen dozen (onbedrukt of met UV-bedrukking), stickers op maat en geweven etiketten en badges."),
-    ("metalen-dozen", "Metalen dozen, onbedrukt of met UV-bedrukking · Waviprint",
-     "Metalen dozen in verschillende vormen, maten en kleuren. Koop ze onbedrukt of laat ze personaliseren met UV-bedrukking. Voor food en non-food."),
-    ("stickers", "Stickers op maat, in elke vorm en maat · Waviprint",
-     "Gepersonaliseerde stickers in alle afmetingen en vormen, uitgesneden volgens jouw ontwerp. Voor etiketten, verpakkingen, branding, events en verenigingen."),
-    ("geweven-etiketten-badges", "Geweven etiketten en badges · Waviprint",
-     "Geweven badges en etiketten in alle soorten, maten en vormen. Voor scouts, gidsen, clubs, kledingmerken en bedrijven."),
-    ("offerte", "Offerte aanvragen · Waviprint",
-     "Vraag in drie korte stappen een offerte aan voor metalen dozen, stickers op maat of geweven etiketten en badges."),
-    ("contact", "Contact · Waviprint",
-     "Neem contact op met Waviprint voor een algemene vraag over metalen dozen, stickers of geweven badges."),
-]
+    ]
 
+# One-pager: navigatie scrolt naar secties op de homepagina (volledige site staat op branch full-site)
 NAV = [
-    ("index", "Home"),
-    ("metalen-dozen", "Metalen dozen"),
-    ("stickers", "Stickers"),
-    ("geweven-etiketten-badges", "Geweven etiketten en badges"),
+    ("top", "Home"),
+    ("dozen", "Metalen dozen"),
+    ("stickers-p", "Stickers"),
+    ("badges-p", "Geweven etiketten en badges"),
     ("contact", "Contact"),
 ]
 
-MENU = [
-    ("index", "Home"),
-    ("metalen-dozen", "Metalen dozen"),
-    ("stickers", "Stickers"),
-    ("geweven-etiketten-badges", "Geweven etiketten en badges"),
-    ("contact", "Contact"),
-    ("offerte", "Offerte aanvragen"),
-]
+MENU = NAV + [("contact", "Offerte aanvragen")]
 
 def href(slug):
-    return "index.html" if slug == "index" else f"{slug}.html"
+    return f"#{slug}"
 
 def head(title, desc, slug):
     return f"""<!doctype html>
@@ -67,7 +51,7 @@ def head(title, desc, slug):
 """
 
 def cur(s, slug):
-    return ' aria-current="page"' if s == slug else ""
+    return ""
 
 QUOTE_CLS = ' class="nav-quote"'
 
@@ -81,7 +65,7 @@ def nav(slug):
     return f"""
 <header class="nav" role="banner" data-nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="index.html" aria-label="Waviprint, naar de homepagina">
+    <a class="nav-logo" href="#top" aria-label="Waviprint, naar de homepagina">
       <img class="logo-color" src="assets/img/waviprint-horizontal-sans-signature-couleur.svg" alt="Waviprint" width="190" height="46">
       <img class="logo-inv" src="assets/img/waviprint-horizontal-sans-signature-inverse.svg" alt="" width="190" height="46">
     </a>
@@ -90,7 +74,7 @@ def nav(slug):
 {links}
       </ul>
     </nav>
-    <a class="nav-cta" href="offerte.html"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 18.4 9a8 8 0 1 1-12.8 0Z"/><path d="M8.5 14.5c1.2-1.4 2.3-1.4 3.5 0s2.3 1.4 3.5 0"/></svg><span>Offerte aanvragen</span></a>
+    <a class="nav-cta" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 18.4 9a8 8 0 1 1-12.8 0Z"/><path d="M8.5 14.5c1.2-1.4 2.3-1.4 3.5 0s2.3 1.4 3.5 0"/></svg><span>Offerte aanvragen</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu openen"><span></span><span></span></button>
   </div>
 </header>
@@ -123,16 +107,16 @@ FOOTER = """
       <div>
         <h4>Producten</h4>
         <ul>
-          <li><a href="metalen-dozen.html">Metalen dozen</a></li>
-          <li><a href="stickers.html">Stickers op maat</a></li>
-          <li><a href="geweven-etiketten-badges.html">Geweven etiketten en badges</a></li>
+          <li><a href="#dozen">Metalen dozen</a></li>
+          <li><a href="#stickers-p">Stickers op maat</a></li>
+          <li><a href="#badges-p">Geweven etiketten en badges</a></li>
         </ul>
       </div>
       <div>
         <h4>Waviprint</h4>
         <ul>
-          <li><a href="offerte.html">Offerte aanvragen</a></li>
-          <li><a href="contact.html">Contact</a></li>
+          <li><a href="#contact">Offerte aanvragen</a></li>
+          <li><a href="#contact">Contact</a></li>
         </ul>
       </div>
       <div>
