@@ -1399,3 +1399,7 @@ a, button, [role="tab"], .choice label, .cat-option label, .x-col, .wi { cursor:
 .cta-prints .cp--3 { left: 57%; top: 16%; rotate: -2deg; }
 .cta-prints .cp-drop { position: absolute; z-index: 3; width: clamp(64px, 16%, 92px); height: auto; left: 46%; bottom: 0; rotate: 12deg; filter: drop-shadow(4px 4px 0 var(--ink)); }
 @media (max-width: 999px) { .cta-prints { margin-inline: .5rem; height: clamp(220px, 50vw, 320px); } .cta-prints .cp { width: clamp(120px, 38%, 200px); } }
+
+/* Alle knoppen: Soleil bij hover (op een gele achtergrond: crème) */
+.btn:hover, .btn:focus-visible { --btn-bg: var(--sun); --btn-fg: var(--ink); --btn-dot: var(--ink-10); }
+.poster--sun .btn:hover, .poster--sun .btn:focus-visible, .btn--sun:hover { --btn-bg: var(--cream); --btn-fg: var(--ink); }
