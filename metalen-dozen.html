@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css?v=20a22b4f">
+<link rel="stylesheet" href="assets/css/style.css?v=10bcc949">
 <script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__wvReady)document.documentElement.classList.remove("js")},3500);</script>
 </head>
 <body class="page-metalen-dozen">
@@ -33,7 +33,7 @@
         <li><a href="index.html">Home</a></li>
         <li><a href="metalen-dozen.html" aria-current="page">Metalen dozen</a></li>
         <li><a href="stickers.html">Stickers</a></li>
-        <li><a href="geweven-etiketten-badges.html">Etiketten en badges</a></li>
+        <li><a href="geweven-etiketten-badges.html">Geweven etiketten en badges</a></li>
         <li><a href="contact.html">Contact</a></li>
       </ul>
     </nav>
@@ -63,72 +63,45 @@
 </div>
 
 <main id="main">
-<div class="tins-scope" data-tins-scope>
-
-<!-- HERO -->
-<section class="page-hero" aria-labelledby="dozen-title">
-  <div class="container page-hero-grid">
-    <div>
-      <h1 id="dozen-title" data-split>
-        <span class="split-line"><span>Metalen dozen.</span></span>
-        <span class="split-line accent-coral"><span>Leeg of met</span></span>
-        <span class="split-line accent-coral"><span>jouw logo.</span></span>
-      </h1>
-      <p class="lead" data-reveal>Ronde, rechthoekige, vierkante of hartvormige dozen in verschillende maten en kleuren. Koop ze onbedrukt, of laat je ontwerp er met UV-bedrukking rechtstreeks op drukken.</p>
-      <div class="mt-2" data-reveal>
-        <div class="segment" data-print-toggle data-state="plain" role="group" aria-label="Kies de weergave">
-          <span class="thumb" aria-hidden="true"></span>
-          <button type="button" data-value="plain" aria-pressed="true">Onbedrukt</button>
-          <button type="button" data-value="uv" aria-pressed="false">Met UV-bedrukking</button>
-        </div>
-        <p id="print-live" class="sr-only" aria-live="polite"></p>
+<!-- HERO: volle foto, grote type erover -->
+<section class="md-hero" aria-labelledby="dozen-title">
+  <img class="md-hero-img" src="assets/img/producten/dozen-onbedrukt-sfeer.jpg" width="1600" height="1200" alt="" fetchpriority="high">
+  <div class="container md-hero-inner">
+    <h1 id="dozen-title" class="md-hero-title" data-split>
+      <span class="split-line"><span>Metalen</span></span>
+      <span class="split-line"><span>dozen.</span></span>
+    </h1>
+    <div class="md-hero-bar" data-reveal>
+      <p><span class="md-dot" aria-hidden="true"></span>Leeg om zelf te vullen, of met jouw logo rechtstreeks op het metaal gedrukt.</p>
+      <div class="md-btns">
+        <a class="md-btn md-btn--sun" href="#catalogus">Bekijk de modellen</a>
+        <a class="md-btn md-btn--cream" href="offerte.html?cat=dozen">Offerte aanvragen</a>
       </div>
-      <div class="btn-row" data-reveal>
-        <a class="btn" data-arrow data-magnetic data-quote-link href="offerte.html?cat=dozen&druk=onbedrukt">Offerte aanvragen</a>
-        <a class="btn btn--ghost" href="#catalogus">Naar de catalogus</a>
-      </div>
-    </div>
-    <div class="hero-objects" aria-hidden="true" style="aspect-ratio:1/.9">
-      <div style="width:62%;left:0;top:26%;"><div data-tin="rond" data-color="goud" data-art="bakkerij"></div></div>
-      <div style="width:40%;right:2%;top:0;"><div data-tin="hoog" data-color="inkt" data-art="thee"></div></div>
-      <div style="width:44%;right:0;bottom:0;"><div data-tin="hart" data-color="wit" data-art="cadeau"></div></div>
     </div>
   </div>
 </section>
 
 <!-- TWEE MANIEREN -->
-<section class="section on-ink" aria-labelledby="twee-title">
+<section class="md-sec md-ways-sec" aria-labelledby="twee-title">
   <div class="container">
-    <div class="section-head">
-      <h2 id="twee-title" data-split>
-        <span class="split-line"><span>Eén doos,</span></span>
-        <span class="split-line accent-sun"><span>twee manieren.</span></span>
-      </h2>
-      <p class="lead" data-reveal>Beide vallen onder hetzelfde aanbod. Je kiest per model of je het onbedrukt of gepersonaliseerd wil.</p>
-    </div>
-    <div class="routes">
-      <article class="route route--plain bezel tin-hover" data-reveal>
-        <div class="core">
-          <div class="route-visual tins-scope" aria-hidden="true"><div data-tin="rechthoek" data-color="zilver" data-art="strepen"></div></div>
+    <h2 id="twee-title" class="md-h2" data-split>
+      <span class="split-line"><span>Eén doos, twee manieren.</span></span>
+    </h2>
+    <div class="md-ways">
+      <article class="md-way md-way--sun" data-reveal>
+        <figure class="md-print md-print--l"><img src="assets/img/producten/dozen-bakkerij.jpg" width="1080" height="1350" alt="Een bakker vult een lege metalen doos met koekjes" loading="lazy" decoding="async"></figure>
+        <div>
           <h3>Onbedrukt</h3>
-          <p style="color:rgba(251,245,233,.75)">Voor wie zelf vult en zelf afwerkt: de bakker, de chocolatier, de theezaak. Je kiest model en kleur, wij leveren de lege dozen.</p>
-          <ul>
-            <li>Vormen, maten en kleuren uit de catalogus</li>
-            <li>Kleine en grote hoeveelheden</li>
-            <li>Combineer met een sticker op maat</li>
-          </ul>
+          <p>Voor wie zelf vult en afwerkt: de bakker, de chocolatier, de theezaak. Je kiest model en kleur, wij leveren de lege dozen.</p>
+          <ul class="md-tags"><li>Vormen en maten uit de catalogus</li><li>Kleine en grote aantallen</li><li>Combineer met een sticker</li></ul>
         </div>
       </article>
-      <article class="route route--print bezel tin-hover" data-reveal>
-        <div class="core">
-          <div class="route-visual tins-scope is-uv" aria-hidden="true"><div data-tin="rechthoek" data-color="wit" data-art="strepen"></div></div>
+      <article class="md-way md-way--sky" data-reveal>
+        <figure class="md-print md-print--r"><img src="assets/img/producten/dozen-uv-blik.jpg" width="1600" height="900" alt="Een metalen doos met een logo in kleur rechtstreeks op het deksel gedrukt" loading="lazy" decoding="async"></figure>
+        <div>
           <h3>Met UV-bedrukking</h3>
-          <p style="color:rgba(251,245,233,.75)">Voor wie de doos zelf laat spreken. Logo's, teksten, afbeeldingen en eigen ontwerpen worden rechtstreeks op het metaal gedrukt.</p>
-          <ul>
-            <li>In volle kleur, op deksel, zijkant of rondom</li>
-            <li>Je eigen ontwerp, of we werken het samen uit</li>
-            <li>Als verpakking, geschenk of merchandising</li>
-          </ul>
+          <p>Logo's, teksten, afbeeldingen en eigen ontwerpen gaan rechtstreeks op het metaal. Op het deksel, de zijkant of rondom.</p>
+          <ul class="md-tags"><li>In volle kleur</li><li>Jouw ontwerp aanleveren</li><li>Verpakking of geschenk</li></ul>
         </div>
       </article>
     </div>
@@ -136,77 +109,63 @@
 </section>
 
 <!-- CATALOGUS -->
-<section class="section" id="catalogus" aria-labelledby="cat-title">
+<section class="md-sec md-cat-sec" id="catalogus" aria-labelledby="cat-title">
   <div class="container">
-    <div class="section-head">
-      <h2 id="cat-title" data-split>
-        <span class="split-line"><span>Kies je model</span></span>
+    <div class="md-cat-head">
+      <h2 id="cat-title" class="md-h2" data-split>
+        <span class="split-line"><span>Kies je model.</span></span>
       </h2>
-      <p class="lead" data-reveal>Tik op een kleur om ze te bekijken. Met de schakelaar bovenaan zie je elke doos onbedrukt of met een voorbeeldontwerp.</p>
+      <p data-reveal>Kies per doos onbedrukt of UV-bedrukt en een kleur. Je keuze gaat mee naar het offerteformulier.</p>
     </div>
     <div class="filters" data-reveal>
-      <div class="filter-pills" role="group" aria-label="Filter op vorm">
-        <button type="button" data-filter="alle" aria-pressed="true">Alle vormen</button>
-        <button type="button" data-filter="rond" aria-pressed="false">Rond</button>
-        <button type="button" data-filter="rechthoekig" aria-pressed="false">Rechthoekig</button>
-        <button type="button" data-filter="vierkant" aria-pressed="false">Vierkant</button>
-        <button type="button" data-filter="hart" aria-pressed="false">Hart</button>
-      </div>
-      <span id="catalog-count" class="muted small" aria-live="polite">8 modellen</span>
+      <div class="filter-pills" role="group" aria-label="Filter op vorm"></div>
+      <span id="catalog-count" class="muted small" aria-live="polite"></span>
     </div>
     <div class="catalog" id="catalog"></div>
-    <p class="catalog-note" data-reveal>Afmetingen zijn indicatief. Beschikbaarheid en aantallen hangen af van het model: we bevestigen alles in je offerte. Staat jouw vorm er niet tussen? <a class="link-arrow" href="offerte.html?cat=dozen&model=eigen" style="display:inline-flex;color:var(--ink)">Vraag een doos op maat aan <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></p>
+    <p class="catalog-note" data-reveal>Afmetingen zijn indicatief. Beschikbaarheid en aantallen hangen af van het model: we bevestigen alles in je offerte. De bedrukte dozen tonen een voorbeeldontwerp. Staat jouw vorm er niet tussen? <a href="offerte.html?cat=dozen&amp;model=eigen">Vraag een eigen vorm aan</a>.</p>
   </div>
 </section>
 
-<!-- UV UITLEG -->
-<section class="section on-ink" aria-labelledby="uv-title">
-  <div class="container split">
-    <div class="uv-stage" data-reveal aria-hidden="true">
-      <div class="tins-scope" style="width:64%"><div data-tin="rond" data-color="zilver" data-art="confetti"></div></div>
-      <div class="uv-beam"></div>
-    </div>
-    <div>
-      <h2 id="uv-title" data-split>
-        <span class="split-line"><span>Zo werkt</span></span>
-        <span class="split-line accent-sky"><span>UV-bedrukking</span></span>
-      </h2>
-      <p class="lead mt-2" data-reveal>De inkt wordt rechtstreeks op de metalen doos gedrukt en meteen uitgehard met UV-licht. Geen sticker, geen wikkel: het ontwerp zit op de doos zelf.</p>
-      <div class="feature-list">
+<!-- UV: volle foto -->
+<section class="md-uv" aria-labelledby="uv-title">
+  <img class="md-uv-img" src="assets/img/producten/dozen-uv-printer.jpg" width="1600" height="1200" alt="Een UV-printer drukt een logo in kleur op het deksel van een metalen doos" loading="lazy" decoding="async">
+  <div class="container md-uv-inner">
+    <h2 id="uv-title" class="md-uv-title" data-split>
+      <span class="split-line"><span>Geen sticker.</span></span>
+      <span class="split-line"><span>Geen wikkel.</span></span>
+      <span class="split-line md-sky"><span>Gewoon op het metaal.</span></span>
+    </h2>
+    <p class="md-uv-lead" data-reveal>De inkt wordt rechtstreeks op de doos gedrukt en meteen uitgehard met UV-licht. Het ontwerp zit op de doos zelf.</p>
+  </div>
+</section>
+<section class="md-sec md-uv-feats" aria-label="Wat je kan laten drukken">
+  <div class="container">
+      <div class="feature-list md-feats">
         <div data-reveal><svg viewBox="0 0 32 32" fill="none" stroke="#8DC8E8" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><circle cx="16" cy="16" r="11"/><path d="M16 5v22M5 16h22"/></svg><div><h4>Logo, tekst of beeld</h4><p>Lever je logo, je tekst, een afbeelding of een volledig ontwerp aan.</p></div></div>
         <div data-reveal><svg viewBox="0 0 32 32" fill="none" stroke="#FFC72C" stroke-width="1.5" stroke-linecap="round" aria-hidden="true"><ellipse cx="16" cy="11" rx="11" ry="4"/><path d="M5 11v10c0 2.2 4.9 4 11 4s11-1.8 11-4V11"/></svg><div><h4>Jij kiest de plaatsing</h4><p>Op het deksel, op de zijkant, of allebei. Vermeld het in je offerte.</p></div></div>
         <div data-reveal><svg viewBox="0 0 32 32" fill="none" stroke="#F9423A" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 22c4-8 7-8 11 0s7 8 11 0"/><path d="M5 14c4-8 7-8 11 0s7 8 11 0"/></svg><div><h4>Food en non-food</h4><p>Van koekjes en chocolade tot kaarsen, cosmetica en relatiegeschenken.</p></div></div>
       </div>
-    </div>
   </div>
 </section>
 
 <!-- FOOD / NON-FOOD -->
-<section class="section" aria-labelledby="uses-title">
+<section class="md-sec md-uses-sec" aria-labelledby="uses-title">
   <div class="container">
-    <div class="section-head">
-      <h2 id="uses-title" data-split>
-        <span class="split-line"><span>Wat gaat er</span></span>
-        <span class="split-line"><span>in jouw doos?</span></span>
-      </h2>
-      <p class="lead" data-reveal>Metalen dozen houden je product mooi en goed bewaard. En ze worden zelden weggegooid.</p>
-    </div>
-    <div class="uses">
-      <article class="use-card bezel" data-reveal>
-        <div class="core">
-          <div class="route-visual" style="background:var(--sun);margin-bottom:2rem" aria-hidden="true"><div class="tins-scope is-uv" style="width:58%"><div data-tin="rond" data-color="wit" data-art="bakkerij"></div></div></div>
-          <h3>Food</h3>
-          <p class="muted">Voor bakkers, patissiers, chocolatiers, confiserieën, voedingsproducenten, delicatessenzaken en thee- of koffiehuizen.</p>
-          <div class="use-list"><span>Koekjes</span><span>Chocolade</span><span>Pralines</span><span>Snoep</span><span>Thee</span><span>Koffie</span></div>
-        </div>
+    <h2 id="uses-title" class="md-h2" data-split>
+      <span class="split-line"><span>Wat gaat er in jouw doos?</span></span>
+    </h2>
+    <div class="md-uses">
+      <article class="md-use" data-reveal>
+        <figure class="md-stack md-stack--l"><img src="assets/img/producten/dozen-uv-bedrukt.jpg" width="1800" height="636" alt="Bedrukte metalen dozen voor thee, koekjes, chocolade, pepermunt en snoep" loading="lazy" decoding="async"></figure>
+        <h3>Food</h3>
+        <p>Voor bakkers, patissiers, chocolatiers, confiserieën, voedingsproducenten, delicatessenzaken en thee- of koffiehuizen.</p>
+        <ul class="md-tags"><li>Koekjes</li><li>Chocolade</li><li>Pralines</li><li>Snoep</li><li>Thee</li><li>Koffie</li></ul>
       </article>
-      <article class="use-card bezel" data-reveal>
-        <div class="core">
-          <div class="route-visual" style="background:var(--sky);margin-bottom:2rem" aria-hidden="true"><div class="tins-scope is-uv" style="width:58%"><div data-tin="vierkant" data-color="inkt" data-art="cadeau"></div></div></div>
-          <h3>Non-food</h3>
-          <p class="muted">Voor geschenkbedrijven, bedrijven met relatiegeschenken, cosmeticamerken en aanbieders van kaarsen, accessoires en merchandising.</p>
-          <div class="use-list"><span>Relatiegeschenken</span><span>Cosmetica</span><span>Kaarsen</span><span>Accessoires</span><span>Promotieartikelen</span></div>
-        </div>
+      <article class="md-use" data-reveal>
+        <figure class="md-stack md-stack--r"><img id="nonfood-img" src="assets/img/producten/dozen-uv-blik.jpg" width="1600" height="900" alt="Een bedrukte metalen doos als geschenk of merchandising" loading="lazy" decoding="async"></figure>
+        <h3>Non-food</h3>
+        <p>Voor geschenkbedrijven, relatiegeschenken, cosmeticamerken en aanbieders van kaarsen, accessoires en merchandising.</p>
+        <ul class="md-tags"><li>Relatiegeschenken</li><li>Cosmetica</li><li>Kaarsen</li><li>Accessoires</li><li>Promotieartikelen</li></ul>
       </article>
     </div>
   </div>
@@ -227,8 +186,6 @@
     </div>
   </div>
 </section>
-
-</div>
 
 <!-- CTA -->
 <section class="cta-block" aria-labelledby="cta-title">
@@ -301,7 +258,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/js/art.js?v=0c52c2b6"></script>
-<script src="assets/js/main.js?v=9ec99f7e"></script>
+<script src="assets/js/art.js?v=6417a91c"></script>
+<script src="assets/js/main.js?v=ee58fec7"></script>
 </body>
 </html>

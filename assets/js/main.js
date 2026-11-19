@@ -15,17 +15,17 @@
 
   /* ---------- Gedeelde data: catalogus metalen dozen ---------- */
   const MODELS = [
-    { id: "rond-s", name: "Ronde doos S", shape: "rond_s", vorm: "rond", size: "Ø 100 × 45 mm", colors: ["zilver", "goud", "wit", "zwart"], art: "bakkerij", use: "Koekjes, snoep, kaarsen" },
-    { id: "rond-l", name: "Ronde doos L", shape: "rond", vorm: "rond", size: "Ø 150 × 70 mm", colors: ["goud", "zilver", "wit", "inkt"], art: "confetti", use: "Koekjes, chocolade, geschenken" },
-    { id: "rechthoek", name: "Rechthoekige doos", shape: "rechthoek", vorm: "rechthoekig", size: "160 × 110 × 50 mm", colors: ["zilver", "goud", "zwart", "wit"], art: "strepen", use: "Pralines, relatiegeschenken" },
+    { id: "rond-s", photo: "rond-s", name: "Ronde doos S", shape: "rond_s", vorm: "rond", size: "Ø 100 × 45 mm", colors: ["zilver", "goud", "wit", "zwart"], art: "bakkerij", use: "Koekjes, snoep, kaarsen" },
+    { id: "rond-l", photo: "rond-l", name: "Ronde doos L", shape: "rond", vorm: "rond", size: "Ø 150 × 70 mm", colors: ["goud", "zilver", "wit", "inkt"], art: "confetti", use: "Koekjes, chocolade, geschenken" },
+    { id: "rechthoek", photo: "rechthoek", name: "Rechthoekige doos", shape: "rechthoek", vorm: "rechthoekig", size: "160 × 110 × 50 mm", colors: ["zwart", "zilver", "goud", "wit"], art: "strepen", use: "Pralines, relatiegeschenken" },
     { id: "plat", name: "Platte doos", shape: "plat", vorm: "rechthoekig", size: "190 × 60 × 20 mm", colors: ["zwart", "zilver", "inkt"], art: "cadeau", use: "Chocoladerepen, pennen, accessoires" },
-    { id: "vierkant", name: "Vierkante doos", shape: "vierkant", vorm: "vierkant", size: "120 × 120 × 70 mm", colors: ["wit", "zilver", "goud", "koraal"], art: "thee", use: "Thee, koffie, cosmetica" },
+    { id: "vierkant", photo: "vierkant", name: "Vierkante doos", shape: "vierkant", vorm: "vierkant", size: "120 × 120 × 70 mm", colors: ["wit", "zilver", "goud", "koraal"], art: "thee", use: "Thee, koffie, cosmetica" },
     { id: "hart", name: "Hartvormige doos", shape: "hart", vorm: "hart", size: "140 × 130 × 45 mm", colors: ["koraal", "zilver", "goud", "wit"], art: "cadeau", use: "Pralines, huwelijk, Valentijn" },
-    { id: "koker", name: "Hoge koker", shape: "hoog", vorm: "rond", size: "Ø 75 × 120 mm", colors: ["inkt", "zilver", "zwart", "goud"], art: "thee", use: "Thee, koffie, kruiden" },
+    { id: "koker", photo: "koker", name: "Hoge koker", shape: "hoog", vorm: "rond", size: "Ø 75 × 120 mm", colors: ["zilver", "goud", "zwart", "inkt"], art: "thee", use: "Thee, koffie, kruiden" },
     { id: "scharnier", name: "Scharnierdoos", shape: "scharnier", vorm: "rechthoekig", size: "95 × 60 × 20 mm", colors: ["zilver", "zwart", "wit", "koraal"], art: "strepen", use: "Pepermunt, balsem, kleine accessoires" }
   ];
   const COLOR_LABEL = { zilver: "Zilver", goud: "Goud", wit: "Wit", zwart: "Zwart", inkt: "Inktblauw", koraal: "Koraal" };
-  const COLOR_HEX = { zilver: "#D3D7DE", goud: "#D9B661", wit: "#FFFFFF", zwart: "#2B2F3B", inkt: "#1D2560", koraal: "#F9423A" };
+  const COLOR_HEX = { zilver: "#D3D7DE", goud: "#D9B661", wit: "#FFFFFF", zwart: "#2B2F3B", inkt: "#141B4D", koraal: "#F9423A" };
   window.WAVI_MODELS = MODELS;
 
   const ICON_ARROW = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>`;
@@ -297,60 +297,77 @@
   function catalog() {
     const grid = $("#catalog");
     if (!grid) return;
-    grid.innerHTML = MODELS.map((m) => `
-      <article class="model bezel" data-vorm="${m.vorm}" data-reveal>
-        <div class="core">
-          <div class="model-visual"><div data-tin="${m.shape}" data-color="${m.colors[0]}" data-art="${m.art}" data-label="${m.name}, ${COLOR_LABEL[m.colors[0]].toLowerCase()}"></div></div>
-          <div class="model-body">
-            <div class="model-title"><h3>${m.name}</h3><span>${m.size}</span></div>
-            <dl class="specs">
-              <dt>Vorm</dt><dd>${m.vorm[0].toUpperCase() + m.vorm.slice(1)}</dd>
-              <dt>Ideaal voor</dt><dd>${m.use}</dd>
-              <dt>Kleur</dt><dd class="color-name">${COLOR_LABEL[m.colors[0]]}</dd>
-            </dl>
+    const list = MODELS.filter((m) => m.photo);
+    const VORM = { rond: "Rond", rechthoekig: "Rechthoekig", vierkant: "Vierkant", hart: "Hart" };
+    const quoteUrl = (m, kleur, druk) => `offerte.html?cat=dozen&model=${m.id}&kleur=${kleur}&druk=${druk}`;
+    grid.innerHTML = list.map((m) => {
+      const shown = COLOR_LABEL[m.colors[0]].toLowerCase();
+      return `
+      <article class="model" data-vorm="${m.vorm}" data-model="${m.id}" data-reveal>
+        <div class="model-photo">
+          <img class="mp mp--plain" src="assets/img/producten/modellen/${m.photo}-onbedrukt.jpg" width="900" height="900" alt="${m.name}, onbedrukt in ${shown}" loading="lazy" decoding="async">
+          <img class="mp mp--uv" src="assets/img/producten/modellen/${m.photo}-uv.jpg" width="900" height="900" alt="${m.name} met een voorbeeld van UV-bedrukking" loading="lazy" decoding="async">
+          <span class="model-tag">${VORM[m.vorm]}</span>
+        </div>
+        <div class="model-body">
+          <div class="model-title"><h3>${m.name}</h3><span>${m.size}</span></div>
+          <p class="model-use">${m.use}</p>
+          <div class="model-opt">
+            <span class="model-lbl">Uitvoering</span>
+            <div class="mini-seg" role="group" aria-label="Uitvoering voor ${m.name}">
+              <button type="button" data-druk="onbedrukt" aria-pressed="true">Onbedrukt</button>
+              <button type="button" data-druk="uv" aria-pressed="false">UV-bedrukt</button>
+            </div>
+          </div>
+          <div class="model-opt">
+            <span class="model-lbl">Kleur <b class="color-name">${COLOR_LABEL[m.colors[0]]}</b></span>
             <div class="swatches" role="group" aria-label="Kleur kiezen voor ${m.name}">
               ${m.colors.map((c, i) => `<button type="button" class="swatch" style="--sw:${COLOR_HEX[c]}" data-color="${c}" aria-pressed="${i === 0}" aria-label="${COLOR_LABEL[c]}"></button>`).join("")}
             </div>
-            <div class="chips"><span class="chip sky"><i></i>Onbedrukt</span><span class="chip"><i></i>UV-bedrukking</span></div>
-            <div class="model-foot">
-              <a class="btn btn--sm" data-arrow data-quote-link href="offerte.html?cat=dozen&model=${m.id}&kleur=${m.colors[0]}&druk=onbedrukt">Offerte voor dit model</a>
-            </div>
           </div>
+          <p class="model-note">Foto: ${shown}. De gekozen kleur geef je mee in je offerte.</p>
+          <a class="btn btn--sm model-cta" data-arrow data-quote-link href="${quoteUrl(m, m.colors[0], "onbedrukt")}">Offerte voor dit model</a>
         </div>
-      </article>`).join("");
+      </article>`;
+    }).join("");
     $$(".btn[data-arrow]", grid).forEach((b) => b.insertAdjacentHTML("beforeend", btnIcon()));
-    window.WaviArt && window.WaviArt.hydrate(grid);
 
-    // Kleurstalen
+    const update = (card) => {
+      const m = list.find((x) => x.id === card.dataset.model);
+      const druk = ($(".mini-seg [aria-pressed=true]", card) || {}).dataset.druk || "onbedrukt";
+      const kleur = ($(".swatch[aria-pressed=true]", card) || {}).dataset.color || m.colors[0];
+      card.classList.toggle("is-uv", druk === "uv");
+      $(".color-name", card).textContent = COLOR_LABEL[kleur];
+      $("[data-quote-link]", card).href = quoteUrl(m, kleur, druk);
+    };
     grid.addEventListener("click", (e) => {
-      const sw = e.target.closest(".swatch");
-      if (!sw) return;
-      const card = sw.closest(".model");
-      const t = $("[data-tin]", card);
-      t.dataset.color = sw.dataset.color;
-      t.dataset.label = `${$("h3", card).textContent}, ${COLOR_LABEL[sw.dataset.color].toLowerCase()}`;
-      window.WaviArt.tin(t);
-      $$(".swatch", card).forEach((s) => s.setAttribute("aria-pressed", String(s === sw)));
-      $(".color-name", card).textContent = COLOR_LABEL[sw.dataset.color];
-      const a = $("[data-quote-link]", card), u = new URL(a.href, location.href);
-      u.searchParams.set("kleur", sw.dataset.color);
-      a.href = "offerte.html" + u.search;
-      if (hasGsap && !reduce) gsap.fromTo(t, { scale: .94, rotate: -2 }, { scale: 1, rotate: 0, duration: .8, ease: "elastic.out(1, .55)" });
+      const b = e.target.closest(".mini-seg button, .swatch");
+      if (!b) return;
+      const card = b.closest(".model"), group = b.parentElement;
+      $$("button", group).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
+      update(card);
     });
 
-    // Filter op vorm
-    const pills = $$(".filter-pills button");
-    pills.forEach((p) => p.addEventListener("click", () => {
+    // Filter op vorm: alleen vormen die in de catalogus zitten
+    const pillsWrap = $(".filter-pills");
+    if (pillsWrap) {
+      const vormen = [...new Set(list.map((m) => m.vorm))];
+      pillsWrap.innerHTML = `<button type="button" data-filter="alle" aria-pressed="true">Alle vormen</button>` + vormen.map((v) => `<button type="button" data-filter="${v}" aria-pressed="false">${VORM[v]}</button>`).join("");
+    }
+    const count = $("#catalog-count");
+    const setCount = (n) => { if (count) count.textContent = `${n} ${n === 1 ? "model" : "modellen"}`; };
+    setCount(list.length);
+    $$(".filter-pills button").forEach((p, _, pills) => p.addEventListener("click", () => {
       pills.forEach((x) => x.setAttribute("aria-pressed", String(x === p)));
-      const v = p.dataset.filter;
-      const cards = $$(".model", grid);
+      const v = p.dataset.filter, cards = $$(".model", grid);
       const show = cards.filter((c) => v === "alle" || c.dataset.vorm === v);
       cards.forEach((c) => c.classList.toggle("is-hidden", !show.includes(c)));
-      if (hasGsap && !reduce) gsap.fromTo(show, { opacity: 0, y: 24 }, { opacity: 1, y: 0, duration: .7, ease: "expo.out", stagger: .05 });
-      const n = $("#catalog-count"); if (n) n.textContent = `${show.length} ${show.length === 1 ? "model" : "modellen"}`;
+      if (hasGsap && !reduce) gsap.fromTo(show, { opacity: 0, y: 20 }, { opacity: 1, y: 0, duration: .6, ease: "expo.out", stagger: .05 });
+      setCount(show.length);
       hasGsap && ScrollTrigger.refresh();
     }));
   }
+
 
   /* ---------- Stickers: speeltuin ---------- */
   function tabs() {
@@ -474,15 +491,17 @@
       const key = cat + "|" + v("model") + "|" + v("kleur") + "|" + v("bedrukking") + "|" + v("sticker_vorm");
       if (vis.dataset.key !== key) {
         vis.dataset.key = key;
+        const photo = (src, alt) => `<img class="sv-photo" src="${src}" alt="${alt}">`;
         if (cat === "dozen") {
-          const m = MODELS.find((x) => x.id === v("model")) || MODELS[1];
-          const col = COLOR_LABEL[v("kleur")] ? v("kleur") : m.colors[0];
-          vis.innerHTML = `<div class="tins-scope ${v("bedrukking") === "uv" ? "is-uv" : ""}" style="width:56%"><div data-tin="${m.shape}" data-color="${col}" data-art="${m.art}"></div></div>`;
+          const m = MODELS.find((x) => x.id === v("model"));
+          const uv = v("bedrukking") === "uv";
+          vis.innerHTML = m && m.photo
+            ? photo(`assets/img/producten/modellen/${m.photo}-${uv ? "uv" : "onbedrukt"}.jpg`, `${m.name}, ${uv ? "met UV-bedrukking" : "onbedrukt"}`)
+            : photo("assets/img/producten/dozen-onbedrukt-sfeer.jpg", "Metalen dozen");
         } else if (cat === "stickers") {
-          const map = { Rond: "rond", Vierkant: "vierkant", Druppel: "druppel", Ovaal: "ovaal", Rechthoek: "rechthoek", "Eigen contour": "contour", Ster: "ster", Boog: "boog" };
-          vis.innerHTML = `<div data-sticker="${map[v("sticker_vorm")] || "druppel"}" data-art="ontwerp" style="width:42%"></div>`;
+          vis.innerHTML = photo("assets/img/producten/stickers-detail.jpg", "Stickers op maat");
         } else if (cat === "badges") {
-          vis.innerHTML = `<div data-badge="rond" data-art="ontwerp" style="width:42%"></div>`;
+          vis.innerHTML = photo("assets/img/producten/badges-detail.jpg", "Geweven badges");
         } else {
           vis.innerHTML = `<img src="assets/img/waviprint-symbole-couleur.svg" alt="" style="width:30%">`;
         }

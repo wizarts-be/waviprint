@@ -24,7 +24,7 @@ NAV = [
     ("index", "Home"),
     ("metalen-dozen", "Metalen dozen"),
     ("stickers", "Stickers"),
-    ("geweven-etiketten-badges", "Etiketten en badges"),
+    ("geweven-etiketten-badges", "Geweven etiketten en badges"),
     ("contact", "Contact"),
 ]
 

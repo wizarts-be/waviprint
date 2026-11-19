@@ -7,7 +7,7 @@
 (function () {
   "use strict";
 
-  const C = { ink: "#141B4D", coral: "#F9423A", sun: "#FFC72C", sky: "#8DC8E8", cream: "#FBF5E9", paper: "#FFFDF8" };
+  const C = { ink: "#141B4D", coral: "#F9423A", sun: "#FFC72C", sky: "#8DC8E8", cream: "#FBF5E9", paper: "#FFFFFF" };
   let uid = 0;
   const id = (p) => `${p}${++uid}`;
 
