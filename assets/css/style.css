@@ -1392,13 +1392,10 @@ a, button, [role="tab"], .choice label, .cat-option label, .x-col, .wi { cursor:
 .cta-inner--form .form-nav { margin-top: 1.75rem; padding-top: 1.25rem; align-items: center; }
 .cta-inner--form .form-nav .muted { color: var(--ink-80); }
 .cta-inner--form .success { box-shadow: none; }
-.cta-steps { margin-top: auto; background: var(--cream); color: var(--ink); border: 2px solid var(--ink); border-radius: 1.25rem; box-shadow: 5px 5px 0 var(--ink); padding: clamp(1.25rem, 1rem + 1vw, 2rem); display: grid; gap: 1.5rem; }
-.cta-steps ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.1rem; }
-.cta-steps ol > li { display: grid; grid-template-columns: 2.4rem 1fr; gap: 1rem; align-items: start; }
-.cta-steps b { width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--ink); color: var(--cream); display: grid; place-items: center; font-family: var(--font-display); font-size: 1.1rem; }
-.cta-steps strong { display: block; font-size: 1.05rem; font-weight: 600; }
-.cta-steps ol span { display: block; color: var(--ink-80); font-size: .95rem; line-height: 1.5; margin-top: .15rem; }
-.cta-direct { list-style: none; padding: 1.25rem 0 0; margin: 0; display: flex; flex-wrap: wrap; gap: .75rem 2rem; border-top: 1px solid var(--line); }
-.cta-direct a { display: inline-flex; align-items: center; gap: .6rem; font-weight: 600; color: var(--ink); text-decoration: none; border-bottom: 1.5px solid transparent; transition: border-color .25s; }
-.cta-direct a:hover { border-color: var(--ink); }
-.cta-direct svg { width: 1.2rem; height: 1.2rem; flex: none; }
+.cta-prints { position: relative; margin-top: auto; height: clamp(240px, 18rem + 4vw, 380px); max-width: 560px; }
+.cta-prints .cp { position: absolute; width: clamp(150px, 42%, 230px); --edge: 2px solid var(--ink); }
+.cta-prints .cp--1 { left: 0; top: 12%; rotate: -8deg; }
+.cta-prints .cp--2 { left: 29%; top: 0; rotate: 4deg; z-index: 2; }
+.cta-prints .cp--3 { left: 57%; top: 16%; rotate: -2deg; }
+.cta-prints .cp-drop { position: absolute; z-index: 3; width: clamp(64px, 16%, 92px); height: auto; left: 46%; bottom: 0; rotate: 12deg; filter: drop-shadow(4px 4px 0 var(--ink)); }
+@media (max-width: 999px) { .cta-prints { margin-inline: .5rem; height: clamp(220px, 50vw, 320px); } .cta-prints .cp { width: clamp(120px, 38%, 200px); } }
