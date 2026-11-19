@@ -65,7 +65,7 @@
     eigen(W, H, d = {}) {
       const bgKey = d.bg || "cream", bg = C[bgKey] || C.cream, fg = INK_ON[bgKey] || C.ink, acc = ACC_ON[bgKey] || C.coral;
       const cx = W / 2, cy = H / 2, r = Math.min(W, H) / 2;
-      const txt = esc((d.text || "Jouw naam").slice(0, 16));
+      const txt = esc((d.text || "Jouw merk").slice(0, 16));
       const fs = Math.min(r * 0.42, (W * 1.5) / Math.max(4, txt.length));
       let dots = "";
       for (let i = 0; i < 20; i++) { const a = (i / 20) * Math.PI * 2; dots += `<circle cx="${cx + Math.cos(a) * r * .78}" cy="${cy + Math.sin(a) * r * .78}" r="${r * .03}" fill="${acc}"/>`; }
@@ -124,7 +124,7 @@
   };
 
   // Eigen tekst op de zijkant van de doos
-  const sideLabel = (d) => esc((d.text || "Jouw naam").slice(0, 16)).toUpperCase();
+  const sideLabel = (d) => esc((d.text || "Jouw merk").slice(0, 16)).toUpperCase();
   function sideTextArc(cx, rx, ry, y, bh, d) {
     const pid = id("sp"), txt = sideLabel(d), bg = d.bg || "cream";
     const fs = Math.min(bh * .52, (rx * 2.4) / Math.max(4, txt.length) * 1.25);

@@ -187,8 +187,6 @@ def build():
         for k, v in ICONS.items():
             body = body.replace("{{" + k + "}}", v)
         footer = FOOTER
-        if slug == "index":
-            footer = footer.replace("</body>", HERO3D + "</body>")
         html = head(title, desc, slug) + nav(slug) + '\n<main id="main">\n' + body + "\n</main>\n" + footer
         (OUT / f"{slug}.html").write_text(html)
         print("✓", slug)

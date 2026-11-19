@@ -1,51 +1,67 @@
-<!-- HERO: 3D inktdruppel met drie golven -->
+<!-- HERO: drie kleurvlakken, één per product -->
 <section class="x-hero" aria-labelledby="hero-title">
-  <div class="x-hero-canvas" data-hero3d aria-hidden="true">
-    <img class="x-hero-fallback" src="assets/img/waviprint-symbole-inverse.svg" alt="">
-  </div>
-
-  <div class="container x-hero-inner">
+  <div class="container x-hero-top">
     <h1 id="hero-title" class="x-hero-title" data-split>
-      <span class="split-line"><span class="c-cream">Dozen<i class="w"></i></span></span>
-      <span class="split-line"><span class="c-coral">Stickers<i class="w"></i></span></span>
-      <span class="split-line"><span class="c-sun">Badges<i class="w"></i></span></span>
+      <span class="split-line"><span>Drie dingen.</span></span>
+      <span class="split-line"><span>Allemaal met jouw logo.</span></span>
     </h1>
-    <div class="x-hero-foot">
-      <p class="x-hero-sub" data-reveal>Met jouw logo erop. Metalen dozen, onbedrukt of met UV-bedrukking, stickers in elke vorm en geweven badges. Uit België.</p>
+    <div class="x-hero-side">
+      <p class="x-hero-sub" data-reveal>Kies waar je merk op moet. Wij drukken, weven en leveren in heel België.</p>
       <div class="btn-row" data-reveal>
         <a class="btn btn--coral" data-arrow data-magnetic href="offerte.html">Offerte aanvragen</a>
-        <a class="btn btn--ghost inv" href="#dozen">Ontdek</a>
       </div>
     </div>
   </div>
 
-  <a class="stamp" href="#dozen" aria-label="Scroll naar de producten">
-    <svg viewBox="0 0 200 200" aria-hidden="true">
-      <defs><path id="stamp-c" d="M100,100 m-78,0 a78,78 0 1,1 156,0 a78,78 0 1,1 -156,0"/></defs>
-      <text><textPath href="#stamp-c" textLength="486" lengthAdjust="spacing">BELGIAN CUSTOM PRINTING · WAVIPRINT ·</textPath></text>
-    </svg>
-    <img src="assets/img/waviprint-symbole-inverse.svg" alt="">
-  </a>
+  <div class="x-hero-cols">
+    <a class="x-col x-col--coral" href="#dozen">
+      <span class="x-col-art" aria-hidden="true"><span data-tin="rond" data-color="goud" data-art="confetti"></span></span>
+      <span class="x-col-label">Metalen dozen</span>
+    </a>
+    <a class="x-col x-col--sun" href="#stickers-p">
+      <span class="x-col-art" aria-hidden="true"><span data-sticker="druppel" data-art="club"></span></span>
+      <span class="x-col-label">Stickers</span>
+    </a>
+    <a class="x-col x-col--sky" href="#badges-p">
+      <span class="x-col-art" aria-hidden="true"><span data-badge="zeshoek" data-art="gidsen"></span></span>
+      <span class="x-col-label">Geweven badges</span>
+    </a>
+  </div>
 </section>
 
 <!-- DRIE POSTERS -->
 <div class="posters">
-  <section class="poster poster--coral" id="dozen" aria-labelledby="p1-title">
-    <div class="poster-inner container">
-      <h2 id="p1-title" class="poster-word">Metalen<br>dozen</h2>
-      <div class="poster-art tins-scope" id="poster-tins" aria-hidden="true">
-        <div class="pa pa-1"><div data-tin="hoog" data-color="inkt" data-art="thee"></div></div>
-        <div class="pa pa-2"><div data-tin="rond" data-color="goud" data-art="confetti"></div></div>
-        <div class="pa pa-3"><div data-tin="vierkant" data-color="wit" data-art="bakkerij"></div></div>
+  <section class="poster poster--white" id="dozen" aria-labelledby="p1-title">
+    <div class="poster-inner container dz">
+      <div class="dz-head">
+        <h2 id="p1-title" class="dz-title">Metalen dozen</h2>
+        <p class="dz-lede">In verschillende vormen, maten en kleuren. Voor koekjes, chocolade, snoep, thee en koffie, maar ook voor cosmetica, kaarsen, accessoires en relatiegeschenken.</p>
       </div>
-      <div class="poster-copy">
-        <p>Leeg, om zelf te vullen. Of met je logo, tekst of ontwerp rechtstreeks met UV op het metaal gedrukt. Voor koekjes, chocolade en thee, maar ook voor kaarsen, cosmetica en relatiegeschenken.</p>
-        <div class="segment segment--ink" data-poster-toggle data-state="plain" role="group" aria-label="Toon de dozen">
-          <span class="thumb" aria-hidden="true"></span>
-          <button type="button" data-value="plain" aria-pressed="true">Onbedrukt</button>
-          <button type="button" data-value="uv" aria-pressed="false">Met UV-bedrukking</button>
+
+      <figure class="dz-art tins-scope" id="poster-tins">
+        <div class="dz-shot dz-shot--big">
+          <img class="dz-img dz-img--plain" src="assets/img/producten/dozen-onbedrukt-sfeer.jpg" width="1600" height="1200" alt="Onbedrukte metalen dozen in zilver, goud, wit en zwart, deksels open, op een koraalrode ondergrond" loading="lazy" decoding="async">
+          <img class="dz-img dz-img--uv" src="assets/img/producten/dozen-uv-printer.jpg" width="1600" height="1200" alt="Een UV-printer drukt een logo in kleur op het deksel van een metalen doos" loading="lazy" decoding="async">
         </div>
-        <a class="btn" data-arrow href="metalen-dozen.html">Naar de catalogus</a>
+        <div class="dz-shot dz-shot--small">
+          <img class="dz-img dz-img--plain" src="assets/img/producten/dozen-bakkerij.jpg" width="1080" height="1350" alt="Een bakker vult een lege metalen doos met koekjes" loading="lazy" decoding="async">
+          <img class="dz-img dz-img--uv" src="assets/img/producten/dozen-thee.jpg" width="1080" height="1350" alt="Een hand opent een bedrukte theedoos op een cafétafel" loading="lazy" decoding="async">
+        </div>
+      </figure>
+
+      <div class="dz-options" data-poster-toggle data-state="plain" role="group" aria-label="Kies hoe je de dozen wil">
+        <button type="button" class="dz-opt" data-value="plain" aria-pressed="true">
+          <strong>Onbedrukt</strong>
+          <span>Kies vorm, maat en kleur. Jij vult en verpakt.</span>
+        </button>
+        <button type="button" class="dz-opt" data-value="uv" aria-pressed="false">
+          <strong>Met UV-bedrukking</strong>
+          <span>Je logo, tekst, afbeelding of eigen ontwerp rechtstreeks op het metaal gedrukt.</span>
+        </button>
+        <div class="dz-foot">
+          <p>Kleine en grote aantallen, afhankelijk van het model.</p>
+          <a class="btn" data-arrow href="metalen-dozen.html">Bekijk alle dozen</a>
+        </div>
       </div>
     </div>
   </section>
@@ -123,7 +139,7 @@
 
     <div class="proof-stage" aria-hidden="true">
       <span class="proof-plate"></span>
-      <div class="proof-tin" id="proof-tin" style="--print:.22"><div data-tin="rond" data-color="zilver" data-art="eigen" data-bg="cream" data-text="Jouw naam"></div></div>
+      <div class="proof-tin" id="proof-tin" style="--print:.22"><div data-tin="rond" data-color="zilver" data-art="eigen" data-bg="cream" data-text="Jouw merk"></div></div>
       <span class="proof-beam"></span>
       <span class="proof-flag">Drukproef</span>
       <div class="proof-done"><div data-sticker="ster" data-art="gedrukt"></div></div>

@@ -695,7 +695,6 @@
         pt.dataset.state = b.dataset.value;
         $$("button", pt).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
         scope.classList.toggle("is-uv", b.dataset.value === "uv");
-        if (hasGsap && !reduce) gsap.fromTo($$(".pa", scope), { y: 0 }, { y: -18, yoyo: true, repeat: 1, duration: .35, ease: "power2.out", stagger: .06 });
       }));
     }
 
@@ -740,7 +739,7 @@
       const BGL = { cream: "crème", coral: "koraal", sun: "zon", sky: "hemelsblauw" };
       const render = () => {
         const t = $("[data-tin]", holder);
-        t.dataset.tin = st.shape; t.dataset.bg = st.bg; t.dataset.text = st.text || "Jouw naam";
+        t.dataset.tin = st.shape; t.dataset.bg = st.bg; t.dataset.text = st.text || "Jouw merk";
         window.WaviArt.tin(t);
         n.textContent = st.text.length;
         const u = new URLSearchParams({ cat: "dozen", model: MODEL[st.shape], kleur: "zilver", druk: "uv" });
@@ -849,7 +848,7 @@
     const posters = $$(".poster");
     posters.forEach((p, i) => {
       const next = posters[i + 1];
-      if (next) gsap.to($(".poster-inner", p), { scale: .9, opacity: .35, ease: "none", scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true } });
+      if (next) gsap.to($(".poster-inner", p), { scale: .94, opacity: .45, ease: "none", scrollTrigger: { trigger: next, start: "top bottom", end: "top top", scrub: true } });
       gsap.from($(".poster-word", p), { yPercent: 40, opacity: 0, duration: 1.2, ease: "expo.out", scrollTrigger: { trigger: p, start: "top 75%", once: true } });
     });
     // Dozen: deksels gaan open op de scroll
@@ -891,7 +890,7 @@
         gsap.to(c, { rotate: gsap.utils.clamp(-35, 35, (e.clientX - lx) * 2), duration: .4 }); lx = e.clientX;
         const t = e.target;
         c.classList.toggle("is-hover", !!t.closest("a, button, .wi, .wipe, [role=slider], input, select, textarea, label"));
-        c.classList.toggle("is-dark", !!t.closest(".x-hero, .on-ink, .wipe-sec, .kin-sec, .footer, .poster--coral, .cta-block"));
+        c.classList.toggle("is-dark", !!t.closest(".on-ink, .wipe-sec, .kin-sec, .footer, .poster--coral, .cta-block"));
       }, { passive: true });
       document.addEventListener("pointerleave", () => c.classList.remove("is-on"));
     }
@@ -899,4 +898,15 @@
 
   // Na het laden van fonts posities herberekenen
   if (hasGsap && document.fonts && document.fonts.ready) document.fonts.ready.then(() => ScrollTrigger.refresh());
+})();
+
+/* Posters hoger dan het scherm: eerst helemaal doorscrollen, pas dan vastzetten */
+(function () {
+  const posters = document.querySelectorAll(".poster");
+  if (!posters.length) return;
+  const fit = () => posters.forEach((p) => p.style.setProperty("--stick", Math.min(0, window.innerHeight - p.offsetHeight) + "px"));
+  fit();
+  window.addEventListener("resize", fit, { passive: true });
+  window.addEventListener("load", fit);
+  if (document.fonts) document.fonts.ready.then(fit);
 })();
