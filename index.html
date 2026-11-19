@@ -16,7 +16,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/css/style.css">
+<link rel="stylesheet" href="assets/css/style.css?v=20a22b4f">
 <script>document.documentElement.classList.add("js");setTimeout(function(){if(!window.__wvReady)document.documentElement.classList.remove("js")},3500);</script>
 </head>
 <body class="page-index">
@@ -132,7 +132,7 @@
       </div>
       <div class="poster-copy">
         <p>Elke vorm, elke maat. Rond, druppel of langs de contour van je eigen ontwerp. Voor etiketten, verpakkingen, events en verenigingen.</p>
-        <a class="btn" data-arrow href="stickers.html">Bouw je sticker</a>
+        <a class="btn" data-arrow href="stickers.html">Bekijk de stickers</a>
       </div>
     </div>
   </section>
@@ -154,53 +154,6 @@
   </section>
 </div>
 
-<!-- ZET JE NAAM EROP: live UV-drukproef -->
-<section class="proof-sec" aria-labelledby="proof-title">
-  <div class="container proof-grid">
-    <div class="proof-copy">
-      <h2 id="proof-title" data-split>
-        <span class="split-line"><span>Zet je naam</span></span>
-        <span class="split-line"><span class="c-sun">erop.</span></span>
-      </h2>
-      <p data-reveal>Typ je naam of merk en druk je eigen doos af. Zo werkt UV-bedrukking: de inkt gaat rechtstreeks op het metaal en hardt meteen uit onder UV-licht.</p>
-
-      <form class="proof-ui" id="proof" data-reveal onsubmit="return false">
-        <label class="proof-field">
-          <span class="sr-only">Jouw naam of merk</span>
-          <input id="proof-text" type="text" maxlength="16" placeholder="Jouw naam of merk" autocomplete="off" spellcheck="false">
-          <span class="proof-count" aria-hidden="true"><span id="proof-n">0</span>/16</span>
-        </label>
-        <div class="proof-row">
-          <div class="proof-opts" role="group" aria-label="Vorm van de doos">
-            <button type="button" data-shape="rond" aria-pressed="true">Rond</button>
-            <button type="button" data-shape="vierkant" aria-pressed="false">Vierkant</button>
-            <button type="button" data-shape="hoog" aria-pressed="false">Koker</button>
-          </div>
-          <div class="proof-colors" role="group" aria-label="Drukkleur">
-            <button type="button" data-bg="cream" style="--sw:#FBF5E9" aria-pressed="true" aria-label="Crème"></button>
-            <button type="button" data-bg="coral" style="--sw:#F9423A" aria-pressed="false" aria-label="Koraal"></button>
-            <button type="button" data-bg="sun" style="--sw:#FFC72C" aria-pressed="false" aria-label="Zon"></button>
-            <button type="button" data-bg="sky" style="--sw:#8DC8E8" aria-pressed="false" aria-label="Hemelsblauw"></button>
-          </div>
-        </div>
-        <div class="btn-row">
-          <button type="button" class="btn btn--sun" id="proof-go" data-arrow>Druk af</button>
-          <a class="btn btn--ghost inv" id="proof-quote" data-arrow href="offerte.html?cat=dozen&druk=uv">Offerte voor deze doos</a>
-        </div>
-        <p class="sr-only" id="proof-live" aria-live="polite"></p>
-      </form>
-    </div>
-
-    <div class="proof-stage" aria-hidden="true">
-      <span class="proof-plate"></span>
-      <div class="proof-tin" id="proof-tin" style="--print:.22"><div data-tin="rond" data-color="zilver" data-art="eigen" data-bg="cream" data-text="Jouw merk"></div></div>
-      <span class="proof-beam"></span>
-      <span class="proof-flag">Drukproef</span>
-      <div class="proof-done"><div data-sticker="ster" data-art="gedrukt"></div></div>
-    </div>
-  </div>
-</section>
-
 <!-- STICKERMUUR -->
 <section class="wall-sec" aria-labelledby="wall-title">
   <div class="wall" id="wall">
@@ -208,7 +161,7 @@
       <span class="split-line"><span>Plak maar</span></span>
       <span class="split-line"><span class="c-coral">raak.</span></span>
     </h2>
-    <p class="wall-hint" data-reveal>Pak een sticker of badge en sleep ze rond. Zo voelt maatwerk.</p>
+    <p class="wall-hint" data-reveal>Sleep ze rond, of klik ergens om er eentje bij te plakken.</p>
     <div class="wall-items" aria-hidden="true">
       <div class="wi" style="--x:6%;--y:14%;--w:150px;--r:-8deg"><div data-sticker="druppel" data-art="merci"></div></div>
       <div class="wi" style="--x:22%;--y:58%;--w:170px;--r:6deg"><div data-badge="schild" data-art="gidsen"></div></div>
@@ -220,7 +173,7 @@
       <div class="wi" style="--x:88%;--y:28%;--w:120px;--r:4deg"><div data-badge="zeshoek" data-art="kamp"></div></div>
       <div class="wi" style="--x:34%;--y:76%;--w:150px;--r:8deg"><div data-sticker="ovaal" data-art="club"></div></div>
     </div>
-    <a class="btn btn--coral wall-cta" data-arrow href="stickers.html#ontwerp">Maak je eigen sticker</a>
+    <a class="btn btn--coral wall-cta" data-arrow href="offerte.html?cat=stickers">Offerte aanvragen</a>
   </div>
 </section>
 
@@ -313,7 +266,7 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
 <script src="https://unpkg.com/lenis@1.1.13/dist/lenis.min.js"></script>
-<script src="assets/js/art.js"></script>
-<script src="assets/js/main.js"></script>
+<script src="assets/js/art.js?v=0c52c2b6"></script>
+<script src="assets/js/main.js?v=9ec99f7e"></script>
 </body>
 </html>

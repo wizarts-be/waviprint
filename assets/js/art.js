@@ -297,7 +297,7 @@
     club:    { bg: C.ink, border: C.coral, fg: C.cream, t1: "FC LINDE", t2: "", icon: "ball" },
     kamp:    { bg: C.cream, border: C.coral, fg: C.ink, t1: "ZOMERKAMP", t2: "2027", icon: "mountain" },
     merk:    { bg: C.ink, border: C.ink, fg: C.cream, t1: "atelier noor", t2: "", icon: "" },
-    merk2:   { bg: C.cream, border: C.cream, fg: C.ink, t1: "Studio Mol", t2: "100% katoen", icon: "" },
+    merk2:   { bg: C.cream, border: C.cream, fg: C.ink, t1: "Studio Fiets", t2: "100% katoen", icon: "" },
     bedrijf: { bg: C.cream, border: C.ink, fg: C.ink, t1: "CREW", t2: "Event team", icon: "drop" },
     naam:    { bg: C.paper, border: C.paper, fg: C.ink, t1: "Lotte V.", t2: "", icon: "" },
     jeugd:   { bg: C.coral, border: C.sun, fg: C.cream, t1: "CHIRO", t2: "Groep 12", icon: "flame" },

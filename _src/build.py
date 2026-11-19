@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Bouwt de statische Waviprint-pagina's: gedeelde head, navigatie, menu, footer + paginabody."""
-import pathlib, sys
+import hashlib, pathlib, sys
 
 OUT = pathlib.Path(__file__).resolve().parent.parent
 SRC = pathlib.Path(__file__).parent / "pages"
@@ -188,6 +188,9 @@ def build():
             body = body.replace("{{" + k + "}}", v)
         footer = FOOTER
         html = head(title, desc, slug) + nav(slug) + '\n<main id="main">\n' + body + "\n</main>\n" + footer
+        for asset in ("assets/css/style.css", "assets/js/art.js", "assets/js/main.js"):
+            v = hashlib.md5((OUT / asset).read_bytes()).hexdigest()[:8]
+            html = html.replace(f'"{asset}"', f'"{asset}?v={v}"')
         (OUT / f"{slug}.html").write_text(html)
         print("✓", slug)
 

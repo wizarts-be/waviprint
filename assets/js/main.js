@@ -353,41 +353,6 @@
   }
 
   /* ---------- Stickers: speeltuin ---------- */
-  function playground() {
-    const pg = $("#playground");
-    if (!pg) return;
-    const stage = $(".pg-stage", pg), st = $("[data-sticker]", stage), range = $("#pg-size"), out = $("#pg-size-out"), dim = $(".pg-dim", pg), cta = $("#pg-cta");
-    const RATIO = { ovaal: 58 / 86, rechthoek: 96 / 172, boog: 1.03 };
-    const LABEL = { rond: "Rond", vierkant: "Vierkant", druppel: "Druppel", ovaal: "Ovaal", rechthoek: "Rechthoek", contour: "Eigen contour", ster: "Ster", boog: "Boog" };
-    let shape = "druppel", size = 8, art = "ontwerp";
-    const update = (animate) => {
-      st.dataset.sticker = shape; st.dataset.art = art; st.dataset.label = `Voorbeeld sticker: ${LABEL[shape]}, ${size} cm`;
-      window.WaviArt.sticker(st);
-      stage.style.setProperty("--size", Math.max(3, Math.min(size, 22)));
-      const h = RATIO[shape] ? Math.round(size * RATIO[shape] * 10) / 10 : size;
-      const txt = `${size} × ${String(h).replace(".", ",")} cm`;
-      out.textContent = `${size} cm`; dim.textContent = txt;
-      range.style.setProperty("--fill", ((size - range.min) / (range.max - range.min)) * 100 + "%");
-      cta.href = `offerte.html?cat=stickers&vorm=${shape}&maat=${encodeURIComponent(txt)}`;
-      if (animate && hasGsap && !reduce) gsap.fromTo(st, { scale: .85, rotate: -8 }, { scale: 1, rotate: 0, duration: .9, ease: "elastic.out(1, .5)" });
-    };
-    $$(".shape-picker button", pg).forEach((b) => {
-      b.addEventListener("click", () => {
-        shape = b.dataset.shape;
-        $$(".shape-picker button", pg).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-        update(true);
-      });
-    });
-    $$(".art-picker button", pg).forEach((b) => b.addEventListener("click", () => {
-      art = b.dataset.art;
-      $$(".art-picker button", pg).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-      update(true);
-    }));
-    range.addEventListener("input", () => { size = +range.value; update(false); });
-    update(false);
-  }
-
-  /* ---------- Tabs ---------- */
   function tabs() {
     $$("[data-tabs]").forEach((wrap) => {
       const list = $('[role="tablist"]', wrap), btns = $$('[role="tab"]', wrap);
@@ -626,13 +591,7 @@
       if (cat === "dozen") {
         const m = params.get("model"); if (m && modelSel) { modelSel.value = MODELS.some((x) => x.id === m) ? m : ""; showCond(); }
         const d = params.get("druk"); if (d) { const r = form.querySelector(`input[name="bedrukking"][value="${d === "uv" ? "uv" : "onbedrukt"}"]`); r && (r.checked = true); showCond(); }
-        const tx = params.get("tekst"); if (tx && form.elements.ontwerp_omschrijving) form.elements.ontwerp_omschrijving.value = "Tekst op het deksel: " + tx.slice(0, 40);
         const k = params.get("kleur"); if (k) { const r = form.querySelector(`input[name="kleur"][value="${k}"]`); r && (r.checked = true); }
-      }
-      if (cat === "stickers") {
-        const vMap = { rond: "Rond", vierkant: "Vierkant", druppel: "Druppel", ovaal: "Ovaal", rechthoek: "Rechthoek", contour: "Eigen contour", ster: "Ster", boog: "Boog" };
-        const v = params.get("vorm"); if (v && vMap[v]) { const r = form.querySelector(`input[name="sticker_vorm"][value="${vMap[v]}"]`); r && (r.checked = true); }
-        const s = params.get("maat"); if (s) form.elements.sticker_maat.value = s;
       }
       if (cat === "badges") {
         const t = params.get("type"); if (t) { const r = form.querySelector(`input[name="badge_type"][value="${t}"]`); r && (r.checked = true); }
@@ -675,7 +634,6 @@
 
   catalog();
   printToggle();
-  playground();
   tabs();
   faq();
   quoteForm();
@@ -728,79 +686,15 @@
       }
     }
 
-    // Zet je naam erop: live drukproef, dan "afdrukken"
-    const proof = $("#proof");
-    if (proof) {
-      const stage = $(".proof-stage"), holder = $("#proof-tin"), input = $("#proof-text"), n = $("#proof-n");
-      const go = $("#proof-go"), quote = $("#proof-quote"), live = $("#proof-live");
-      const beam = $(".proof-beam", stage), done = $(".proof-done", stage), flag = $(".proof-flag", stage);
-      const st = { text: "", shape: "rond", bg: "cream", printed: false, busy: false };
-      const MODEL = { rond: "rond-l", vierkant: "vierkant", hoog: "koker" };
-      const BGL = { cream: "crème", coral: "koraal", sun: "zon", sky: "hemelsblauw" };
-      const render = () => {
-        const t = $("[data-tin]", holder);
-        t.dataset.tin = st.shape; t.dataset.bg = st.bg; t.dataset.text = st.text || "Jouw merk";
-        window.WaviArt.tin(t);
-        n.textContent = st.text.length;
-        const u = new URLSearchParams({ cat: "dozen", model: MODEL[st.shape], kleur: "zilver", druk: "uv" });
-        if (st.text) u.set("tekst", st.text);
-        quote.href = "offerte.html?" + u.toString();
-      };
-      const toProof = () => {
-        if (!st.printed) return;
-        st.printed = false; stage.classList.remove("is-printed"); flag.textContent = "Drukproef";
-        holder.style.setProperty("--print", ".22");
-        if (hasGsap) gsap.to(done, { scale: 0, opacity: 0, duration: .3 });
-      };
-      input.addEventListener("input", () => { st.text = input.value; toProof(); render(); });
-      $$(".proof-opts button", proof).forEach((b) => b.addEventListener("click", () => {
-        st.shape = b.dataset.shape;
-        $$(".proof-opts button", proof).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-        toProof(); render();
-        if (hasGsap && !reduce) gsap.fromTo(holder, { scale: .9, rotate: -4 }, { scale: 1, rotate: 0, duration: .9, ease: "elastic.out(1, .5)" });
-      }));
-      $$(".proof-colors button", proof).forEach((b) => b.addEventListener("click", () => {
-        st.bg = b.dataset.bg;
-        $$(".proof-colors button", proof).forEach((x) => x.setAttribute("aria-pressed", String(x === b)));
-        toProof(); render();
-      }));
-      const print = () => {
-        if (st.busy) return;
-        if (!st.text) {
-          input.placeholder = "Eerst je naam typen…"; input.focus();
-          if (hasGsap && !reduce) gsap.fromTo(input, { x: -8 }, { x: 0, duration: .6, ease: "elastic.out(1, .3)" });
-          return;
-        }
-        st.busy = true;
-        const finish = () => {
-          st.busy = false; st.printed = true; stage.classList.add("is-printed"); flag.textContent = "UV-bedrukt";
-          live.textContent = "Je doos is bedrukt met " + st.text + " op " + BGL[st.bg] + ".";
-        };
-        if (!hasGsap || reduce) { holder.style.setProperty("--print", "1"); finish(); return; }
-        const lid = $(".lid", holder);
-        gsap.timeline({ onComplete: finish })
-          .to(holder, { scaleY: .94, scaleX: 1.03, duration: .18, ease: "power2.in", transformOrigin: "50% 100%" })
-          .to(holder, { scaleY: 1, scaleX: 1, duration: .7, ease: "elastic.out(1, .4)" })
-          .set(beam, { opacity: 1, yPercent: -60 }, .1)
-          .to(beam, { yPercent: 330, duration: 1.1, ease: "power1.inOut" }, .1)
-          .to(holder, { "--print": 1, duration: 1, ease: "power1.inOut" }, .2)
-          .to(beam, { opacity: 0, duration: .25 }, 1.05)
-          .to(lid, { y: -22, duration: .25, ease: "power2.out" }, 1.15)
-          .to(lid, { y: 0, duration: .5, ease: "bounce.out" }, 1.4)
-          .fromTo(done, { scale: 1.6, rotate: 30, opacity: 0 }, { scale: 1, rotate: -8, opacity: 1, duration: .6, ease: "back.out(2.4)" }, 1.45);
-      };
-      go.addEventListener("click", print);
-      input.addEventListener("keydown", (e) => { if (e.key === "Enter") { e.preventDefault(); print(); } });
-      render();
-    }
 
-    // Stickermuur: sleep, gooi, plak
+    // Stickermuur: sleep, gooi, plak. Klik op een lege plek = nieuwe sticker
     const wall = $("#wall");
-    if (wall && window.Draggable && hasGsap) {
-      gsap.registerPlugin(Draggable);
+    if (wall && hasGsap) {
+      const canDrag = !!window.Draggable;
+      if (canDrag) gsap.registerPlugin(Draggable);
       let z = 10;
-      $$(".wi", wall).forEach((el, i) => {
-        if (!reduce) gsap.from(el, { scale: 0, rotate: (i % 2 ? 40 : -40), duration: 1, ease: "back.out(1.8)", delay: i * .06, scrollTrigger: { trigger: wall, start: "top 70%", once: true } });
+      const attach = (el) => {
+        if (!canDrag) return;
         Draggable.create(el, {
           bounds: wall, type: "x,y", zIndexBoost: false,
           onPress() { el.style.zIndex = ++z; gsap.to(el, { scale: 1.12, duration: .3, ease: "power3.out" }); gsap.to(el.firstElementChild, { filter: "drop-shadow(0 30px 30px rgba(20,27,77,.3))", duration: .3 }); },
@@ -810,6 +704,32 @@
             gsap.to(el.firstElementChild, { filter: "drop-shadow(0 0 0 rgba(0,0,0,0))", duration: .4 });
           }
         });
+      };
+      $$(".wi", wall).forEach((el, i) => {
+        if (!reduce) gsap.from(el, { scale: 0, rotate: (i % 2 ? 40 : -40), duration: 1, ease: "back.out(1.8)", delay: i * .06, scrollTrigger: { trigger: wall, start: "top 70%", once: true } });
+        attach(el);
+      });
+
+      const items = $(".wall-items", wall);
+      const SHAPES = ["rond", "vierkant", "druppel", "ovaal", "contour", "ster", "boog"];
+      const ARTS = ["merci", "gedrukt", "ontwerp", "ontwerp2", "ontwerp3", "ontwerp4", "handmade", "club"];
+      const rnd = (a) => a[Math.floor(Math.random() * a.length)];
+      const added = [];
+      wall.addEventListener("click", (e) => {
+        if (e.target.closest(".wi, a, button")) return;
+        const r = wall.getBoundingClientRect();
+        const small = window.innerWidth <= 700;
+        const w = Math.round((110 + Math.random() * 70) * (small ? .62 : 1));
+        const el = document.createElement("div");
+        el.className = "wi wi--new";
+        el.style.cssText = `left:${e.clientX - r.left - w / 2}px;top:${e.clientY - r.top - w / 2}px;width:${w}px;--r:${Math.round(Math.random() * 28 - 14)}deg;z-index:${++z}`;
+        el.innerHTML = `<div data-sticker="${rnd(SHAPES)}" data-art="${rnd(ARTS)}"></div>`;
+        items.appendChild(el);
+        window.WaviArt && window.WaviArt.sticker(el.firstElementChild);
+        attach(el);
+        if (!reduce) gsap.fromTo(el, { scale: 1.7, opacity: 0 }, { scale: 1, opacity: 1, duration: .55, ease: "back.out(2.6)" });
+        added.push(el);
+        if (added.length > 30) { const old = added.shift(); gsap.to(old, { scale: 0, opacity: 0, duration: .3, onComplete: () => old.remove() }); }
       });
     }
 

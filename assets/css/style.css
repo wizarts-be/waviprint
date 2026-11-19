@@ -557,39 +557,6 @@ p { margin: 0; text-wrap: pretty; }
 .step p { color: var(--ink-60); }
 .on-ink .step p { color: rgba(251,245,233,.72); }
 
-/* ---------- Sticker-speeltuin ---------- */
-.playground .core { padding: clamp(1.25rem, .8rem + 1.5vw, 2rem); display: grid; gap: 1.5rem; }
-@media (min-width: 1000px) { .playground .core { grid-template-columns: 1.15fr .85fr; gap: 2rem; } }
-.pg-stage {
-  position: relative; border-radius: var(--r-lg); min-height: 420px; display: grid; place-items: center; overflow: hidden;
-  background-color: var(--cream-2);
-  background-image: linear-gradient(var(--line) 1px, transparent 1px), linear-gradient(90deg, var(--line) 1px, transparent 1px);
-  background-size: 24px 24px; background-position: center;
-}
-.pg-stage .sticker-wrap { width: calc(var(--size, 8) * 3.6%); min-width: 70px; max-width: 78%; transition: width .7s var(--ease-spring); }
-.pg-dim { position: absolute; left: 1rem; bottom: 1rem; padding: .45rem .8rem; border-radius: 999px; background: var(--ink); color: var(--cream); font-size: .85rem; font-weight: 600; font-variant-numeric: tabular-nums; }
-.pg-controls { display: grid; gap: 1.6rem; align-content: start; padding: .5rem; }
-.pg-controls h3 { font-size: 1.5rem; }
-.pg-label { font-weight: 600; font-size: .92rem; margin-bottom: .7rem; display: flex; justify-content: space-between; }
-.pg-label output { color: var(--ink-60); font-variant-numeric: tabular-nums; }
-.shape-picker { display: grid; grid-template-columns: repeat(4, 1fr); gap: .5rem; }
-.shape-picker button {
-  aspect-ratio: 1.25; border-radius: var(--r-md); display: grid; place-items: center; gap: .2rem; padding: .6rem;
-  background: var(--cream); box-shadow: inset 0 0 0 1px var(--line); font-size: .8rem; font-weight: 500; color: var(--ink-80);
-  transition: box-shadow .35s var(--ease-out), background-color .35s, transform .5s var(--ease-spring);
-}
-.shape-picker button svg { width: 1.9rem; height: 1.9rem; }
-.shape-picker button:hover { box-shadow: inset 0 0 0 1px var(--ink-40); }
-.shape-picker button:active { transform: scale(.96); }
-.shape-picker button[aria-pressed="true"] { background: var(--ink); color: var(--cream); box-shadow: none; }
-.range { -webkit-appearance: none; appearance: none; width: 100%; height: 6px; border-radius: 99px; background: linear-gradient(90deg, var(--coral) var(--fill, 30%), var(--ink-10) var(--fill, 30%)); }
-.range::-webkit-slider-thumb { -webkit-appearance: none; width: 26px; height: 26px; border-radius: 50%; background: var(--ink); border: 4px solid var(--cream); box-shadow: 0 0 0 1px var(--ink), 0 6px 14px -4px rgba(20,27,77,.5); cursor: grab; }
-.range::-moz-range-thumb { width: 22px; height: 22px; border-radius: 50%; background: var(--ink); border: 4px solid var(--cream); box-shadow: 0 0 0 1px var(--ink); cursor: grab; }
-.art-picker { display: flex; gap: .5rem; }
-.art-picker button { width: 2.4rem; height: 2.4rem; border-radius: 50%; background: var(--sw); box-shadow: inset 0 0 0 1px rgba(20,27,77,.15); position: relative; transition: transform .45s var(--ease-spring); }
-.art-picker button:hover { transform: scale(1.08); }
-.art-picker button[aria-pressed="true"]::after { content: ""; position: absolute; inset: -4px; border-radius: 50%; box-shadow: 0 0 0 2px var(--ink); }
-
 /* Sticker-collage */
 .collage { position: relative; display: grid; gap: 1.25rem; grid-template-columns: repeat(2, 1fr); }
 @media (min-width: 900px) { .collage { grid-template-columns: repeat(4, 1fr); } }
@@ -898,7 +865,7 @@ p { margin: 0; text-wrap: pretty; }
 
 /* ---------- Stickermuur ---------- */
 .wall-sec { background: var(--cream); position: relative; z-index: 1; }
-.wall { position: relative; min-height: clamp(640px, 100svh, 900px); overflow: hidden; display: grid; place-items: center; align-content: center; gap: 1.5rem; text-align: center; padding: 6rem var(--gutter);
+.wall { cursor: copy; position: relative; min-height: clamp(640px, 100svh, 900px); overflow: hidden; display: grid; place-items: center; align-content: center; gap: 1.5rem; text-align: center; padding: 6rem var(--gutter);
   background-image: radial-gradient(rgba(20,27,77,.14) 1.2px, transparent 1.3px); background-size: 26px 26px; }
 .wall-title { font-size: clamp(3.6rem, 1.5rem + 8vw, 10rem); line-height: .84; letter-spacing: -.05em; position: relative; z-index: 1; pointer-events: none; }
 .wall-hint { color: var(--ink-60); font-size: var(--fs-lead); position: relative; z-index: 1; pointer-events: none; }
@@ -1019,38 +986,3 @@ p { margin: 0; text-wrap: pretty; }
 .page-metalen-dozen .nav:not(.is-solid) .nav-links,
 .page-stickers .nav:not(.is-solid) .nav-links,
 .page-geweven-etiketten-badges .nav:not(.is-solid) .nav-links { box-shadow: inset 0 0 0 1.5px rgba(20,27,77,.25); }
-
-/* ---------- Zet je naam erop: live UV-drukproef ---------- */
-.proof-sec { background: var(--ink); color: var(--cream); padding-block: var(--section); position: relative; z-index: 1; overflow: hidden; }
-.proof-grid { display: grid; gap: 3rem; align-items: center; }
-@media (min-width: 1000px) { .proof-grid { grid-template-columns: .9fr 1.1fr; gap: 5rem; } }
-.proof-copy h2 { font-size: clamp(3.4rem, 1.4rem + 6.6vw, 8rem); line-height: .86; letter-spacing: -.05em; }
-.proof-copy > p { margin-top: 1.75rem; color: rgba(251,245,233,.75); font-size: var(--fs-lead); max-width: 38ch; }
-.proof-ui { margin-top: 2.25rem; display: grid; gap: 1.1rem; max-width: 34rem; }
-.proof-field { position: relative; display: block; }
-.proof-field input {
-  width: 100%; border: 0; border-radius: 1.1rem; padding: 1.2rem 4.5rem 1.2rem 1.35rem;
-  background: rgba(251,245,233,.07); color: var(--cream); box-shadow: inset 0 0 0 1.5px rgba(251,245,233,.2);
-  font-family: var(--font-display); font-weight: 800; font-size: clamp(1.4rem, 1.1rem + 1vw, 2rem); letter-spacing: -.02em;
-  transition: box-shadow .3s var(--ease-out), background-color .3s;
-}
-.proof-field input::placeholder { color: rgba(251,245,233,.35); }
-.proof-field input:focus { outline: none; background: rgba(251,245,233,.1); box-shadow: inset 0 0 0 2px var(--sun); }
-.proof-count { position: absolute; right: 1.2rem; top: 50%; translate: 0 -50%; font-size: .85rem; color: rgba(251,245,233,.5); font-variant-numeric: tabular-nums; }
-.proof-row { display: flex; flex-wrap: wrap; gap: .75rem 1.25rem; align-items: center; justify-content: space-between; }
-.proof-opts { display: inline-flex; padding: 4px; border-radius: .9rem; box-shadow: inset 0 0 0 1.5px rgba(251,245,233,.18); }
-.proof-opts button { padding: .6rem 1rem; border-radius: .7rem; font-weight: 600; font-size: .92rem; color: rgba(251,245,233,.75); transition: background-color .35s var(--ease-out), color .35s; }
-.proof-opts button[aria-pressed="true"] { background: var(--cream); color: var(--ink); }
-.proof-colors { display: inline-flex; gap: .5rem; }
-.proof-colors button { width: 2.3rem; height: 2.3rem; border-radius: 50%; background: var(--sw); position: relative; transition: transform .45s var(--ease-spring); }
-.proof-colors button:hover { transform: scale(1.1); }
-.proof-colors button[aria-pressed="true"]::after { content: ""; position: absolute; inset: -5px; border-radius: 50%; box-shadow: 0 0 0 2px var(--cream); }
-.proof-ui .btn-row { margin-top: .5rem; }
-.proof-stage { position: relative; aspect-ratio: 1.05; display: grid; place-items: center; }
-.proof-plate { position: absolute; inset: 4%; border-radius: 50%; background: radial-gradient(circle at 50% 45%, #2A3478 0%, #1B2358 50%, rgba(27,35,88,0) 72%); }
-.proof-tin { position: relative; width: 76%; z-index: 1; }
-.proof-beam { position: absolute; left: 6%; right: 6%; top: 8%; height: 18%; border-radius: 50%; z-index: 2; pointer-events: none; opacity: 0;
-  background: radial-gradient(ellipse at center, rgba(141,200,232,.85), rgba(141,200,232,.25) 45%, transparent 70%); filter: blur(4px); mix-blend-mode: screen; }
-.proof-flag { position: absolute; top: 6%; left: 4%; z-index: 3; padding: .45rem .85rem; border-radius: .7rem; font-size: .85rem; font-weight: 600; background: rgba(251,245,233,.1); color: var(--cream); box-shadow: inset 0 0 0 1px rgba(251,245,233,.2); transition: background-color .4s, color .4s; }
-.proof-stage.is-printed .proof-flag { background: var(--sun); color: var(--ink); box-shadow: none; }
-.proof-done { position: absolute; right: 2%; top: 4%; width: 24%; z-index: 4; opacity: 0; transform: scale(0); pointer-events: none; }
