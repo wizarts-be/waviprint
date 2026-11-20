@@ -8,7 +8,27 @@ SRC = pathlib.Path(__file__).parent / "pages"
 PAGES = [
     ("index", "Waviprint · Metalen dozen, stickers en geweven badges op maat",
      "Waviprint is een Belgisch bedrijf voor metalen dozen (onbedrukt of met UV-bedrukking), stickers op maat en geweven etiketten en badges."),
-    ]
+    # Schetsen van de volledige site (wireframes). Echte ontwerpen staan op branch full-site.
+    ("metalen-dozen", "Metalen dozen, onbedrukt of met UV-bedrukking · Waviprint",
+     "Metalen dozen in verschillende vormen, maten en kleuren. Koop ze onbedrukt of laat ze personaliseren met UV-bedrukking. Voor food en non-food."),
+    ("stickers", "Stickers op maat, in elke vorm en maat · Waviprint",
+     "Gepersonaliseerde stickers in alle afmetingen en vormen, uitgesneden volgens jouw ontwerp. Voor etiketten, verpakkingen, branding, events en verenigingen."),
+    ("geweven-etiketten-badges", "Geweven etiketten en badges · Waviprint",
+     "Geweven badges en etiketten in alle soorten, maten en vormen. Voor scouts, gidsen, clubs, kledingmerken en bedrijven."),
+    ("offerte", "Offerte aanvragen · Waviprint",
+     "Vraag in drie korte stappen een offerte aan voor metalen dozen, stickers op maat of geweven etiketten en badges."),
+    ("contact", "Contact · Waviprint",
+     "Neem contact op met Waviprint voor een algemene vraag over metalen dozen, stickers of geweven badges."),
+]
+
+SKETCHES = [s for s, _, _ in PAGES[1:]]
+SK_LABELS = {
+    "metalen-dozen": "Metalen dozen",
+    "stickers": "Stickers op maat",
+    "geweven-etiketten-badges": "Geweven etiketten en badges",
+    "offerte": "Offerte aanvragen",
+    "contact": "Contact",
+}
 
 # One-pager: navigatie scrolt naar secties op de homepagina (volledige site staat op branch full-site)
 NAV = [
@@ -21,8 +41,20 @@ NAV = [
 
 MENU = NAV + [("contact", "Offerte aanvragen")]
 
+# Op de schetspagina's linkt de navigatie naar de pagina's zelf
+PAGE_NAV = [
+    ("metalen-dozen", "Metalen dozen"),
+    ("stickers", "Stickers"),
+    ("geweven-etiketten-badges", "Geweven etiketten en badges"),
+    ("contact", "Contact"),
+]
+PAGE_MENU = [("index", "Home")] + PAGE_NAV + [("offerte", "Offerte aanvragen")]
+
 def href(slug):
     return f"#{slug}"
+
+def page_href(slug):
+    return "index.html" if slug == "index" else f"{slug}.html"
 
 def head(title, desc, slug):
     return f"""<!doctype html>
@@ -44,28 +76,34 @@ def head(title, desc, slug):
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="assets/css/style.css">
-<script>document.documentElement.classList.add("js");setTimeout(function(){{if(!window.__wvReady)document.documentElement.classList.remove("js")}},3500);</script>
+<link rel="stylesheet" href="assets/css/schets.css">
+<script>(function(d){{d.classList.add("js");try{{if(sessionStorage.getItem("wv-curtain"))d.classList.add("curtain-on")}}catch(e){{}}setTimeout(function(){{d.classList.remove("curtain-on")}},2500);setTimeout(function(){{if(!window.__wvReady)d.classList.remove("js")}},3500)}})(document.documentElement);</script>
 </head>
-<body class="page-{slug}">
+<body class="page-{slug}{' is-schets' if slug != 'index' else ''}">
 <a class="skip-link" href="#main">Naar de inhoud</a>
 """
 
 def cur(s, slug):
-    return ""
+    return ' aria-current="page"' if s == slug else ""
 
 QUOTE_CLS = ' class="nav-quote"'
 
 def nav(slug):
+    home = slug == "index"
+    h = page_href  # navigatie gaat overal naar de pagina's (andere pagina's zijn schetsen)
+    items, menu_items = PAGE_NAV, PAGE_MENU
+    logo = "#top" if home else "index.html"
+    cta = "#contact" if home else "offerte.html"
     links = "\n".join(
-        f'        <li><a href="{href(s)}"{cur(s, slug)}{QUOTE_CLS if s == "offerte" else ""}>{label}</a></li>'
-        for s, label in NAV)
+        f'        <li><a href="{h(s)}"{cur(s, slug)}{QUOTE_CLS if s == "offerte" else ""}>{label}</a></li>'
+        for s, label in items)
     menu = "\n".join(
-        f'      <li><a href="{href(s)}"{cur(s, slug)}>{label}</a></li>'
-        for s, label in MENU)
+        f'      <li><a href="{h(s)}"{cur(s, slug)}>{label}</a></li>'
+        for s, label in menu_items)
     return f"""
 <header class="nav" role="banner" data-nav>
   <div class="nav-inner">
-    <a class="nav-logo" href="#top" aria-label="Waviprint, naar de homepagina">
+    <a class="nav-logo" href="{logo}" aria-label="Waviprint, naar de homepagina">
       <img class="logo-color" src="assets/img/waviprint-horizontal-sans-signature-couleur.svg" alt="Waviprint" width="190" height="46">
       <img class="logo-inv" src="assets/img/waviprint-horizontal-sans-signature-inverse.svg" alt="" width="190" height="46">
     </a>
@@ -74,7 +112,7 @@ def nav(slug):
 {links}
       </ul>
     </nav>
-    <a class="nav-cta" href="#contact"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 18.4 9a8 8 0 1 1-12.8 0Z"/><path d="M8.5 14.5c1.2-1.4 2.3-1.4 3.5 0s2.3 1.4 3.5 0"/></svg><span>Offerte aanvragen</span></a>
+    <a class="nav-cta" href="{cta}"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 18.4 9a8 8 0 1 1-12.8 0Z"/><path d="M8.5 14.5c1.2-1.4 2.3-1.4 3.5 0s2.3 1.4 3.5 0"/></svg><span>Offerte aanvragen</span></a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="menu" aria-label="Menu openen"><span></span><span></span></button>
   </div>
 </header>
@@ -153,6 +191,29 @@ FOOTER = """
 </html>
 """
 
+PAGE_FOOTER_LINKS = {
+    'href="#dozen"': 'href="metalen-dozen.html"',
+    'href="#stickers-p"': 'href="stickers.html"',
+    'href="#badges-p"': 'href="geweven-etiketten-badges.html"',
+    '<a href="#contact">Offerte aanvragen</a>': '<a href="offerte.html">Offerte aanvragen</a>',
+    '<a href="#contact">Contact</a>': '<a href="contact.html">Contact</a>',
+}
+
+DROP_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 2.5 18.4 9a8 8 0 1 1-12.8 0Z"/><path d="M8.5 14.5c1.2-1.4 2.3-1.4 3.5 0s2.3 1.4 3.5 0"/></svg>'
+
+
+def sk_next(slug):
+    links = "\n".join(f'      <a href="{s}.html">{SK_LABELS[s]}</a>' for s in SKETCHES if s != slug)
+    return f"""<section class="sk-sec sk-sec--dark" aria-label="Andere pagina's in schets">
+  <div class="container">
+    <div class="sk-label">Bekijk ook</div>
+    <div class="sk-next">
+      <a href="index.html">Home · one-pager</a>
+{links}
+    </div>
+  </div>
+</section>"""
+
 # Kleine helpers die in de body-bestanden als {{TAG}} gebruikt kunnen worden
 ICONS = {
     "ARROW": '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>',
@@ -173,8 +234,12 @@ def build():
         for k, v in ICONS.items():
             body = body.replace("{{" + k + "}}", v)
         footer = FOOTER
+        if slug != "index":
+            body = body.replace("{{SK_NEXT}}", sk_next(slug))
+            for a, b in PAGE_FOOTER_LINKS.items():
+                footer = footer.replace(a, b)
         html = head(title, desc, slug) + nav(slug) + '\n<main id="main">\n' + body + "\n</main>\n" + footer
-        for asset in ("assets/css/style.css", "assets/js/art.js", "assets/js/main.js"):
+        for asset in ("assets/css/style.css", "assets/css/schets.css", "assets/js/art.js", "assets/js/main.js"):
             v = hashlib.md5((OUT / asset).read_bytes()).hexdigest()[:8]
             html = html.replace(f'"{asset}"', f'"{asset}?v={v}"')
         (OUT / f"{slug}.html").write_text(html)

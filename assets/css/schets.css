@@ -1,0 +1,204 @@
+/* ==========================================================================
+   Waviprint — schetspagina's (wireframes van de volledige site)
+   De one-pager is live; deze pagina's tonen hoe de rest van de site eruit zou zien.
+   ========================================================================== */
+
+:root {
+  --sk-ink: #141B4D;
+  --sk-line: rgba(20, 27, 77, .38);
+  --sk-soft: rgba(20, 27, 77, .1);
+  --sk-fill: rgba(20, 27, 77, .045);
+  --sk-paper: #FBF5E9;
+  --sk-note: #F9423A;
+}
+
+/* ---------- Schetspagina: canvas ---------- */
+body.is-schets { background: var(--sk-paper); }
+body.is-schets main {
+  background-color: var(--sk-paper);
+  background-image: radial-gradient(var(--sk-soft) 1px, transparent 1.2px);
+  background-size: 22px 22px;
+  color: var(--sk-ink);
+}
+
+
+
+/* ---------- Secties ---------- */
+.sk-sec { padding-block: clamp(2.5rem, 1.5rem + 3vw, 4.5rem); position: relative; }
+.sk-sec + .sk-sec { border-top: 1.5px dashed var(--sk-line); }
+.sk-sec--dark { background: rgba(20, 27, 77, .06); }
+
+.sk-label {
+  display: flex; align-items: center; gap: .6rem;
+  margin-bottom: 1.5rem;
+  font-size: .75rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase;
+  color: var(--sk-ink); opacity: .55;
+}
+.sk-label b {
+  display: inline-grid; place-items: center; width: 1.6rem; height: 1.6rem;
+  border: 1.5px solid currentColor; border-radius: 50%; font-size: .7rem; letter-spacing: 0;
+}
+
+.sk-anno {
+  display: inline-flex; gap: .4rem; align-items: baseline;
+  margin-top: 1rem; font-size: .88rem; font-style: italic; color: var(--sk-note);
+}
+.sk-anno::before { content: "↳"; font-style: normal; }
+
+/* ---------- Bouwstenen ---------- */
+.sk-h1, .sk-h2, .sk-h3 { font-family: var(--font-display); font-weight: 800; color: var(--sk-ink); margin: 0; letter-spacing: -.03em; }
+.sk-h1 { font-size: clamp(2.8rem, 1.5rem + 5.5vw, 6.5rem); line-height: .92; }
+.sk-h2 { font-size: clamp(1.9rem, 1.2rem + 2.6vw, 3.4rem); line-height: 1; }
+.sk-h3 { font-size: clamp(1.15rem, 1rem + .5vw, 1.45rem); line-height: 1.15; }
+.sk-p { margin: .9rem 0 0; max-width: 52ch; color: var(--sk-ink); opacity: .75; line-height: 1.55; }
+
+.sk-img {
+  position: relative; display: grid; place-items: center;
+  min-height: 12rem; border-radius: 1.1rem;
+  border: 1.5px solid var(--sk-line);
+  background:
+    linear-gradient(to top right, transparent calc(50% - .75px), var(--sk-soft) calc(50% - .75px), var(--sk-soft) calc(50% + .75px), transparent calc(50% + .75px)),
+    linear-gradient(to bottom right, transparent calc(50% - .75px), var(--sk-soft) calc(50% - .75px), var(--sk-soft) calc(50% + .75px), transparent calc(50% + .75px)),
+    var(--sk-fill);
+  overflow: hidden;
+}
+.sk-img > span {
+  position: relative; padding: .35rem .75rem; border-radius: 999px;
+  background: var(--sk-paper); border: 1px solid var(--sk-line);
+  font-size: .78rem; font-weight: 500; text-align: center; max-width: 85%;
+}
+.sk-img--sq { aspect-ratio: 1; min-height: 0; }
+.sk-img--wide { aspect-ratio: 16 / 9; min-height: 0; }
+.sk-img--tall { aspect-ratio: 4 / 5; min-height: 0; }
+
+.sk-lines { display: grid; gap: .55rem; margin-top: 1rem; }
+.sk-lines i { display: block; height: .55rem; border-radius: 99px; background: var(--sk-soft); }
+.sk-lines i:nth-child(1) { width: 92%; }
+.sk-lines i:nth-child(2) { width: 100%; }
+.sk-lines i:nth-child(3) { width: 74%; }
+.sk-lines i:nth-child(4) { width: 58%; }
+
+.sk-btns { display: flex; flex-wrap: wrap; gap: .6rem; margin-top: 1.4rem; }
+.sk-btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  padding: .7rem 1.2rem; border-radius: 999px;
+  border: 1.5px solid var(--sk-ink); color: var(--sk-ink);
+  font-size: .92rem; font-weight: 600; background: transparent;
+  transition: background .25s;
+}
+.sk-btn--fill { background: var(--sk-ink); color: var(--sk-paper); }
+a.sk-btn:hover { background: var(--sun); color: var(--sk-ink); }
+
+.sk-tags { display: flex; flex-wrap: wrap; gap: .4rem; list-style: none; padding: 0; margin: 1rem 0 0; }
+.sk-tags li { padding: .3rem .7rem; border-radius: 999px; border: 1px dashed var(--sk-line); font-size: .8rem; }
+
+.sk-card {
+  border: 1.5px solid var(--sk-line); border-radius: 1.3rem;
+  padding: clamp(1.1rem, .8rem + 1vw, 1.6rem);
+  background: rgba(255, 255, 255, .55);
+}
+.sk-card > .sk-img { margin-bottom: 1.1rem; }
+
+/* Grids */
+.sk-grid { display: grid; gap: clamp(1rem, .6rem + 1.4vw, 1.75rem); }
+@media (min-width: 760px) {
+  .sk-grid--2 { grid-template-columns: repeat(2, 1fr); }
+  .sk-grid--3 { grid-template-columns: repeat(3, 1fr); }
+  .sk-grid--4 { grid-template-columns: repeat(4, 1fr); }
+  .sk-grid--split { grid-template-columns: 1fr 1fr; align-items: center; }
+  .sk-grid--side { grid-template-columns: 1.6fr 1fr; align-items: start; }
+}
+@media (min-width: 760px) and (max-width: 1050px) { .sk-grid--4 { grid-template-columns: repeat(2, 1fr); } }
+.sk-grid--6 { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 760px) { .sk-grid--6 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 1050px) { .sk-grid--6 { grid-template-columns: repeat(6, 1fr); } }
+
+.sk-tile figcaption { margin-top: .5rem; font-size: .85rem; font-weight: 500; text-align: center; }
+
+/* Hero */
+.sk-hero .sk-img { min-height: clamp(20rem, 14rem + 22vw, 34rem); align-items: end; justify-items: start; padding: clamp(1.25rem, .8rem + 2vw, 2.5rem); }
+.sk-hero .sk-img > span { position: absolute; top: 1rem; right: 1rem; }
+.sk-hero-copy { position: relative; }
+
+/* Kop met tekst ernaast */
+.sk-head { display: grid; gap: 1rem; margin-bottom: 2rem; }
+@media (min-width: 900px) { .sk-head { grid-template-columns: 1fr 1fr; align-items: end; } .sk-head .sk-p { margin: 0; } }
+
+/* Stappen */
+.sk-steps { counter-reset: s; list-style: none; padding: 0; margin: 0; }
+.sk-steps li { counter-increment: s; }
+.sk-steps li::before {
+  content: counter(s); display: inline-grid; place-items: center;
+  width: 2.4rem; height: 2.4rem; margin-bottom: .9rem; border-radius: 50%;
+  border: 1.5px solid var(--sk-ink); font-family: var(--font-display); font-size: 1.1rem;
+}
+
+/* FAQ */
+.sk-faq { display: grid; gap: .6rem; }
+.sk-faq div {
+  display: flex; justify-content: space-between; gap: 1rem; align-items: center;
+  padding: 1rem 1.2rem; border: 1.5px solid var(--sk-line); border-radius: .9rem;
+  font-weight: 500; background: rgba(255, 255, 255, .55);
+}
+.sk-faq div::after { content: "+"; font-size: 1.3rem; opacity: .6; }
+
+/* Formulieren */
+.sk-field { display: grid; gap: .4rem; }
+.sk-field label, .sk-field .sk-flabel { font-size: .85rem; font-weight: 600; }
+.sk-input { height: 2.9rem; border: 1.5px solid var(--sk-line); border-radius: .75rem; background: rgba(255, 255, 255, .7); }
+.sk-input--area { height: 6.5rem; }
+.sk-input--drop { height: 6rem; border-style: dashed; display: grid; place-items: center; font-size: .82rem; opacity: .8; }
+.sk-fields { display: grid; gap: 1rem; }
+@media (min-width: 640px) { .sk-fields { grid-template-columns: 1fr 1fr; } .sk-fields .full { grid-column: 1 / -1; } }
+.sk-chips { display: flex; flex-wrap: wrap; gap: .4rem; }
+.sk-chips span { padding: .45rem .85rem; border-radius: 999px; border: 1.5px solid var(--sk-line); font-size: .85rem; }
+.sk-chips span.on { background: var(--sk-ink); color: var(--sk-paper); border-color: var(--sk-ink); }
+
+.sk-progress { display: flex; align-items: center; gap: .6rem; margin-bottom: 1.6rem; font-size: .85rem; font-weight: 600; flex-wrap: wrap; }
+.sk-progress em { font-style: normal; display: inline-grid; place-items: center; width: 1.7rem; height: 1.7rem; border-radius: 50%; border: 1.5px solid var(--sk-line); margin-right: .35rem; }
+.sk-progress .on em { background: var(--sk-ink); color: var(--sk-paper); border-color: var(--sk-ink); }
+.sk-progress hr { flex: 1; min-width: 1.5rem; border: 0; border-top: 1.5px dashed var(--sk-line); margin: 0; }
+
+.sk-dl { display: grid; grid-template-columns: auto 1fr; gap: .5rem 1.2rem; margin: 1rem 0 0; font-size: .92rem; }
+.sk-dl dt { font-weight: 600; }
+.sk-dl dd { margin: 0; opacity: .75; }
+
+/* Paginakaart voor CTA onderaan */
+.sk-next { display: grid; gap: 1rem; }
+@media (min-width: 760px) { .sk-next { grid-template-columns: repeat(3, 1fr); } }
+.sk-next a {
+  display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: 1.1rem 1.3rem; border-radius: 1rem; border: 1.5px dashed var(--sk-ink);
+  font-family: var(--font-display); font-weight: 800; font-size: 1.15rem;
+  transition: background .25s;
+}
+.sk-next a:hover { background: var(--sun); }
+.sk-next a::after { content: "→"; font-family: var(--font-body); }
+
+.sk-mt { margin-top: clamp(1.5rem, 1rem + 1.5vw, 2.5rem); }
+
+/* ---------- Volle-foto-hero (originele hero-opmaak, foto als placeholder) ---------- */
+.md-hero.sk-fullpic {
+  background-color: #CFCBD3;
+  background-image:
+    linear-gradient(to top right, transparent calc(50% - 1px), rgba(20, 27, 77, .22) calc(50% - 1px), rgba(20, 27, 77, .22) calc(50% + 1px), transparent calc(50% + 1px)),
+    linear-gradient(to bottom right, transparent calc(50% - 1px), rgba(20, 27, 77, .22) calc(50% - 1px), rgba(20, 27, 77, .22) calc(50% + 1px), transparent calc(50% + 1px));
+}
+.sk-fullpic-label {
+  position: absolute; z-index: 2; left: 50%; top: 42%; transform: translate(-50%, -50%);
+  padding: .55rem 1.1rem; border-radius: 999px;
+  background: var(--sk-paper); color: var(--sk-ink); border: 1.5px dashed var(--sk-ink);
+  font-size: .9rem; font-weight: 600; white-space: nowrap; max-width: calc(100% - 2rem); overflow: hidden; text-overflow: ellipsis;
+}
+
+main > .sk-sec:first-child { padding-top: clamp(8rem, 6.5rem + 4vw, 10.5rem); }
+
+/* Paginatitel offerte en contact, zoals in het origineel */
+.sk-page-h1 { font-size: var(--fs-h1); max-width: none; }
+
+/* Contact: formulier even hoog als de linkerkolom */
+.sk-contact { align-items: stretch; }
+.sk-contact > .sk-card { display: flex; flex-direction: column; }
+.sk-contact > .sk-card .sk-fields { flex: 1; grid-template-rows: auto auto 1fr; }
+.sk-contact > .sk-card .sk-field.full:last-child { grid-template-rows: auto 1fr; }
+.sk-contact > .sk-card .sk-input--area { height: auto; min-height: 6.5rem; }

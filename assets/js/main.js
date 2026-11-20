@@ -90,21 +90,24 @@
     if (!curtain || reduce || !hasGsap) { window.location.href = href; return; }
     curtain.style.visibility = "visible";
     try { sessionStorage.setItem("wv-curtain", "1"); } catch (e) {}
-    gsap.fromTo(sheet, { yPercent: 105 }, { yPercent: 0, duration: .75, ease: "expo.inOut", onComplete: () => { window.location.href = href; } });
-    gsap.to($(".mark", curtain), { opacity: 1, duration: .3, delay: .5 });
+    gsap.fromTo(sheet, { yPercent: 105 }, { yPercent: 0, duration: .55, ease: "power3.inOut", onComplete: () => { window.location.href = href; } });
+    gsap.to($(".mark", curtain), { opacity: 1, duration: .2, delay: .35 });
   }
   function curtainOut() {
     let flag = null;
     try { flag = sessionStorage.getItem("wv-curtain"); sessionStorage.removeItem("wv-curtain"); } catch (e) {}
-    if (!curtain || !flag || reduce || !hasGsap) return;
+    const root = document.documentElement;
+    // Als de veiligheidstimer het gordijn al weghaalde (trage verbinding), niet opnieuw tonen
+    if (!curtain || !flag || reduce || !hasGsap || !root.classList.contains("curtain-on")) { root.classList.remove("curtain-on"); return; }
     curtain.style.visibility = "visible";
     gsap.set(sheet, { yPercent: 0 });
     gsap.set($(".mark", curtain), { opacity: 1 });
-    gsap.to($(".mark", curtain), { opacity: 0, duration: .25 });
-    gsap.to(sheet, { yPercent: -110, duration: .9, ease: "expo.inOut", delay: .05, onComplete: () => { curtain.style.visibility = "hidden"; } });
+    root.classList.remove("curtain-on");
+    gsap.to($(".mark", curtain), { opacity: 0, duration: .2 });
+    gsap.to(sheet, { yPercent: -110, duration: .7, ease: "power3.inOut", delay: .05, onComplete: () => { curtain.style.visibility = "hidden"; } });
   }
   curtainOut();
-  window.addEventListener("pageshow", (e) => { if (e.persisted && curtain) { curtain.style.visibility = "hidden"; hasGsap && gsap.set(sheet, { yPercent: 105 }); } });
+  window.addEventListener("pageshow", (e) => { if (e.persisted && curtain) { document.documentElement.classList.remove("curtain-on"); curtain.style.visibility = "hidden"; hasGsap && gsap.set(sheet, { yPercent: 105 }); } });
   document.addEventListener("click", (e) => {
     const a = e.target.closest("a");
     if (!a || e.defaultPrevented || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;

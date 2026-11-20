@@ -727,6 +727,10 @@ p { margin: 0; text-wrap: pretty; }
 .curtain .sheet .waves { position: absolute; left: 0; right: 0; top: 0; transform: translateY(-98%); }
 .curtain .sheet .waves svg { width: 200%; }
 .curtain .mark { position: absolute; left: 50%; top: 50%; width: 64px; transform: translate(-50%, -50%); opacity: 0; }
+/* Nieuwe pagina start meteen bedekt, zodat ze niet even zichtbaar is voor het gordijn wegschuift */
+.curtain-on .curtain { visibility: visible; }
+.curtain-on .curtain .sheet { transform: none; }
+.curtain-on .curtain .mark { opacity: 1; }
 
 /* ---------- Reveal (start-status alleen met JS) ---------- */
 .js [data-reveal] { opacity: 0; transform: translateY(40px); }
